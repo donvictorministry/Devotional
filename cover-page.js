@@ -52,26 +52,25 @@
         '.cvp-book{height:clamp(96px,17dvh,180px);width:auto;display:block;filter:drop-shadow(0 10px 16px rgba(110,10,46,.32));animation:cvpfloat 6s ease-in-out infinite}',
         '.cvp-bt{font-family:' + FONT + ';font-style:italic;font-weight:900;letter-spacing:-.02em}',
         '.cvp-bs{font-family:' + FONT + ';font-style:italic;font-weight:600}',
-        '.cvp-bc{font-family:' + FONT + ';font-weight:700;letter-spacing:.1em}',
+        '.cvp-bc{font-family:' + FONT + ';font-weight:600;letter-spacing:.14em}',
         '.cvp-gap{flex:1 1 0;min-height:4px}',
         '.cvp-title{margin:clamp(2px,.8dvh,8px) 0 0;font-family:' + FONT + ';font-style:italic;font-weight:900;letter-spacing:-.03em;line-height:.96;font-size:clamp(44px,min(17.5vw,9dvh),104px)}',
         '.cvp-l1{display:block;color:' + C.ink + '}',
         '.cvp-l2{display:block;color:' + C.brand + '}',
         '.cvp-swoosh{display:block;width:min(66%,300px);height:clamp(9px,1.9dvh,16px);margin:clamp(1px,.5dvh,6px) auto 0}',
-        '.cvp-pill{margin-top:clamp(6px,1.6dvh,16px);padding:clamp(8px,1.5dvh,13px) clamp(14px,4vw,26px);border-radius:999px;background:' + C.brand + ';color:#FFFFFF;',
-        'font-weight:800;font-size:clamp(13px,4.2vw,22px);line-height:1.15;letter-spacing:.01em;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis;',
-        'box-shadow:0 6px 16px rgba(179,18,74,.32)}',
+        '.cvp-pill{margin-top:clamp(6px,1.6dvh,16px);padding:clamp(8px,1.5dvh,13px) clamp(16px,5vw,30px);border-radius:999px;background:' + C.brand + ';color:#FFFFFF;',
+        'font-weight:800;font-size:clamp(15px,5vw,23px);line-height:1.15;letter-spacing:.01em;box-shadow:0 6px 16px rgba(179,18,74,.32)}',
         '.cvp-tag{margin:clamp(6px,1.6dvh,14px) 0 0;font-style:italic;font-weight:800;font-size:clamp(16px,5.6vw,25px);line-height:1.26;color:' + C.ink + '}',
-        '.cvp-begin{flex:none;width:min(88%,380px);height:clamp(56px,8.6dvh,74px);margin:clamp(8px,2dvh,20px) 0 clamp(14px,2.4dvh,22px);transform:translateY(-4px);display:flex;align-items:center;justify-content:center;gap:14px;',
+        '.cvp-begin{flex:none;width:min(88%,380px);height:clamp(56px,8.6dvh,74px);margin:clamp(8px,2dvh,20px) 0 clamp(6px,1.4dvh,14px);display:flex;align-items:center;justify-content:center;gap:14px;',
         'border:3px solid #E9B93C;border-radius:999px;cursor:pointer;color:#FFFFFF;font-family:' + FONT + ';font-weight:900;font-size:clamp(19px,6vw,26px);line-height:1;letter-spacing:.08em;padding:0 12px;',
         'background:linear-gradient(180deg,#F23E78 0%,' + C.brandDark + ' 52%,' + C.brandDeep + ' 100%);',
         'box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -5px 12px rgba(58,10,31,.45),0 0 0 2px rgba(255,243,196,.45),0 8px 20px rgba(58,10,31,.35);animation:cvpglow 2.6s ease-in-out infinite}',
-        '.cvp-begin:active{transform:translateY(-4px) scale(.97);filter:brightness(.95)}',
+        '.cvp-begin:active{transform:scale(.97);filter:brightness(.95)}',
         '.cvp-begin:focus-visible{outline:3px solid ' + C.gold + ';outline-offset:3px}',
         '.cvp-begin svg{width:32px;height:24px;flex:none;display:block}',
         '@keyframes cvpglow{0%,100%{box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -5px 12px rgba(58,10,31,.45),0 0 0 2px rgba(255,243,196,.45),0 8px 20px rgba(58,10,31,.35)}50%{box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -5px 12px rgba(58,10,31,.45),0 0 0 6px rgba(255,213,74,.4),0 8px 26px rgba(255,213,74,.55)}}',
         '.cvp-foot{position:relative;z-index:3;flex:none;width:calc(100% + 40px);height:var(--foot);display:flex;align-items:center;justify-content:center;',
-        'padding:clamp(28px,5dvh,46px) 18px calc(env(safe-area-inset-bottom,0px) + clamp(34px,5.6dvh,56px));margin:0 -20px}',
+        'padding:clamp(26px,4.6dvh,44px) 18px calc(env(safe-area-inset-bottom,0px) + clamp(30px,5dvh,52px));margin:0 -20px}',
         '.cvp-act{flex:1 1 0;height:100%;max-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(4px,1dvh,9px);',
         'background:none;border:0;border-radius:14px;color:#FFFFFF;cursor:pointer;font-family:' + FONT + ';font-weight:700;font-size:clamp(15px,4.5vw,20px);line-height:1;padding:0}',
         '.cvp-act:active{transform:scale(.95);opacity:.9}',
@@ -120,8 +119,8 @@
         '<path d="M80 114 C 120 124 180 122 218 108 C 178 116 120 116 80 114 Z" fill="' + C.brand + '"/>' +
         '<text class="cvp-bs" x="142" y="140" text-anchor="middle" font-size="11" fill="#2A1520">' + TEXT.subtitle1 + '</text>' +
         '<text class="cvp-bs" x="142" y="154" text-anchor="middle" font-size="11" fill="#2A1520">' + TEXT.subtitle2 + '</text>' +
-        /* your name inside the book — enlarged and weighted */
-        '<text class="cvp-bc" x="142" y="184" text-anchor="middle" font-size="13.5" fill="' + C.brandDark + '">' + TEXT.name + '</text>' +
+        /* your name inside the book */
+        '<text class="cvp-bc" x="142" y="182" text-anchor="middle" font-size="10.5" fill="' + C.brandDark + '">' + TEXT.name + '</text>' +
         '<g clip-path="url(#cvpClip)">' +
         '<rect x="30" y="168" width="220" height="162" fill="url(#cvpSky)"/>' +
         '<ellipse cx="196" cy="262" rx="70" ry="52" fill="url(#cvpSun)"/>' +
