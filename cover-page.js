@@ -40,8 +40,8 @@
 
     function css() {
       return [
-        /* Full viewport phone container */
-        '.cvp{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;width:100dvw;height:100dvh;min-height:100vh;overflow:hidden;',
+         /* Full viewport phone container */
+        '.cvp{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;width:100%;overflow:hidden;',
         'background:linear-gradient(180deg,#FFFFFF 0%,#FFF8FA 35%,' + C.blushSoft + ' 65%,' + C.blush + ' 100%);',
         'color:' + C.ink + ';font-family:' + FONT + ';-webkit-user-select:none;user-select:none;',
         '-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;',
