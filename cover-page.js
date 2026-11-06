@@ -1,7 +1,7 @@
 /* cover-page.js - Professional, elevated mobile cover for "Don't Give Up!"
  *
  * STANDALONE & ZERO-DEPENDENCY
- * Mobile-only layout with Android status bar and navigation bar safe clearance.
+ * Mobile-only layout guaranteed to never cut off on ANY Android phone.
  * Contract: window.CoverPage.render(containerElement, onBegin)
  * Dispatches "coverpage:begin" CustomEvent on container.
  */
@@ -11,7 +11,6 @@
     var TEXT = {
       line1: "DON\u2019T",
       line2: 'GIVE UP!',
-      kicker: 'A FAITH-BASED DEVOTIONAL',
       author: 'Rev. Dr. Chris Johnson, PhD',
       subtitle: 'Faith, Hope and Endurance in Christ',
       tag: 'Enter your access code to unlock your spiritual breakthrough.',
@@ -41,100 +40,97 @@
 
     function css() {
       return [
-        /* Full mobile viewport container (no max-width, no desktop wrapper) */
+        /* Root container: strictly 100dvw x 100dvh, no scroll, no cut-off */
         '.cvp{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;width:100dvw;height:100dvh;min-height:100vh;overflow:hidden;',
-        'background:linear-gradient(180deg,#FFFFFF 0%,#FFF8FA 35%,' + C.blushSoft + ' 70%,' + C.blush + ' 100%);',
+        'background:linear-gradient(180deg,#FFFFFF 0%,#FFF8FA 35%,' + C.blushSoft + ' 65%,' + C.blush + ' 100%);',
         'color:' + C.ink + ';font-family:' + FONT + ';-webkit-user-select:none;user-select:none;',
         '-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;display:flex;flex-direction:column}',
         
         '.cvp *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}',
 
-        /* Ambient golden backlight behind the book */
-        '.cvp-ambient{position:absolute;top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));left:50%;transform:translateX(-50%);',
-        'width:min(94dvw,380px);height:min(32dvh,260px);border-radius:50%;pointer-events:none;',
-        'background:radial-gradient(circle,rgba(255,211,66,.42) 0%,rgba(223,30,90,.16) 50%,transparent 72%);',
-        'filter:blur(28px);animation:cvp-glow 4.8s ease-in-out infinite}',
+        /* Ambient halo behind book */
+        '.cvp-ambient{position:absolute;top:max(20px,calc(env(safe-area-inset-top,0px) + 12px));left:50%;transform:translateX(-50%);',
+        'width:min(90dvw,340px);height:min(28dvh,220px);border-radius:50%;pointer-events:none;',
+        'background:radial-gradient(circle,rgba(255,211,66,.38) 0%,rgba(223,30,90,.14) 50%,transparent 72%);',
+        'filter:blur(24px);animation:cvp-glow 4.8s ease-in-out infinite}',
 
-        /* Wave Footer SVG */
-        '.cvp-waves{position:absolute;left:0;bottom:0;width:100%;height:clamp(170px,26dvh,225px);pointer-events:none;z-index:1}',
+        /* Wave Footer Graphic: sits behind the bottom actions */
+        '.cvp-waves{position:absolute;left:0;bottom:0;width:100%;height:clamp(145px,22dvh,190px);pointer-events:none;z-index:1}',
         '.cvp-waves svg{width:100%;height:100%;display:block}',
 
-        /* Single cohesive vertical flow with guaranteed Android status-bar and nav-bar clearance */
+        /* Main Content Column:
+           - Sized to fit comfortably in a single screen without ANY vertical overflow
+           - Top padding guarantees clearance from Android camera punch-hole / notch
+           - Bottom padding guarantees full visibility above Android navigation pill/bar */
         '.cvp-content{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;',
-        'align-items:center;text-align:center;justify-content:space-between;',
-        'padding-top:max(22px,calc(env(safe-area-inset-top,0px) + 14px));',
-        'padding-bottom:max(24px,calc(env(safe-area-inset-bottom,0px) + 16px));',
-        'padding-left:clamp(16px,5vw,26px);padding-right:clamp(16px,5vw,26px)}',
+        'align-items:center;text-align:center;justify-content:center;',
+        'gap:clamp(6px,1.3dvh,14px);',
+        'padding-top:max(24px,calc(env(safe-area-inset-top,0px) + 18px));',
+        'padding-bottom:max(24px,calc(env(safe-area-inset-bottom,0px) + 18px));',
+        'padding-left:clamp(16px,5vw,24px);padding-right:clamp(16px,5vw,24px)}',
 
-        /* Hero Book */
-        '.cvp-bookwrap{position:relative;flex:0 1 auto;display:flex;justify-content:center;align-items:center;',
+        /* Hero 3D Book: large & crisp, but budgeted so nothing overflows */
+        '.cvp-bookwrap{position:relative;flex:0 0 auto;display:flex;justify-content:center;align-items:center;',
         'margin:0 auto;perspective:1000px}',
-        '.cvp-book{height:clamp(140px,21dvh,198px);width:auto;display:block;',
-        'filter:drop-shadow(0 16px 26px rgba(114,10,52,.35)) drop-shadow(0 4px 10px rgba(0,0,0,.14));',
+        '.cvp-book{height:clamp(116px,18dvh,160px);width:auto;display:block;',
+        'filter:drop-shadow(0 14px 22px rgba(114,10,52,.32)) drop-shadow(0 4px 8px rgba(0,0,0,.12));',
         'animation:cvp-float 5s ease-in-out infinite}',
 
-        /* Middle Narrative Block: tightly grouped, zero awkward voids */
-        '.cvp-narrative{flex:0 1 auto;display:flex;flex-direction:column;align-items:center;',
-        'width:100%;gap:clamp(3px,.7dvh,7px);margin-top:clamp(4px,.8dvh,8px)}',
-
         /* Author Pill (Capped at 15px label) */
-        '.cvp-pill{display:inline-flex;align-items:center;gap:6px;padding:clamp(4px,.8dvh,6px) clamp(12px,3.5vw,18px);',
+        '.cvp-pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:clamp(4px,.8dvh,6px) clamp(12px,3.5vw,18px);',
         'border-radius:999px;background:rgba(223,30,90,.08);border:1.5px solid rgba(223,30,90,.22);',
         'color:' + C.brandDark + ';font-size:15px;font-weight:800;letter-spacing:.02em;line-height:1}',
         '.cvp-pill svg{width:14px;height:14px;fill:' + C.brand + ';flex:none}',
 
-        /* Monumental Title (>= 46px up to 86px) */
-        '.cvp-title{font-family:' + FONT + ';font-style:italic;font-weight:950;line-height:.92;',
-        'letter-spacing:-.035em;font-size:clamp(46px,min(15.5vw,8.2dvh),86px)}',
+        /* Monumental Title: prominent, bold (>= 42px up to 72px) */
+        '.cvp-title{flex:0 0 auto;font-family:' + FONT + ';font-style:italic;font-weight:950;line-height:.92;',
+        'letter-spacing:-.035em;font-size:clamp(42px,min(14vw,7.2dvh),72px)}',
         '.cvp-t1{display:block;color:' + C.ink + ';text-shadow:0 1px 2px rgba(21,11,28,.1)}',
-        '.cvp-t2{display:block;color:' + C.brand + ';text-shadow:0 3px 14px rgba(223,30,90,.24)}',
+        '.cvp-t2{display:block;color:' + C.brand + ';text-shadow:0 3px 12px rgba(223,30,90,.22)}',
 
-        /* Subtitle (strictly >= 19px) */
-        '.cvp-sub{font-size:clamp(19px,4.8vw,23px);font-weight:800;color:' + C.inkMuted + ';',
+        /* Subtitle: strictly >= 19px */
+        '.cvp-sub{flex:0 0 auto;font-size:clamp(19px,4.5vw,22px);font-weight:800;color:' + C.inkMuted + ';',
         'line-height:1.2;letter-spacing:-.01em}',
 
-        /* Access Tagline (strictly >= 19px) */
-        '.cvp-tag{font-size:clamp(19px,4.6vw,22px);font-weight:700;color:' + C.ink + ';line-height:1.26;',
-        'text-wrap:balance}',
+        /* Access Tagline: strictly >= 19px */
+        '.cvp-tag{flex:0 0 auto;font-size:clamp(19px,4.3vw,21px);font-weight:700;color:' + C.ink + ';line-height:1.24;',
+        'text-wrap:balance;max-width:94%}',
 
-        /* Action Cluster: connects tightly without needless gap */
-        '.cvp-actions{flex:0 0 auto;width:100%;max-width:390px;display:flex;flex-direction:column;align-items:center;',
-        'gap:clamp(8px,1.3dvh,13px);margin-top:clamp(6px,1.2dvh,12px);z-index:15}',
-
-        /* "BEGIN JOURNEY" CTA (>= 20px) */
-        '.cvp-begin{position:relative;width:100%;height:clamp(54px,7.8dvh,68px);display:flex;align-items:center;justify-content:center;',
-        'gap:12px;border-radius:999px;border:3px solid ' + C.gold + ';cursor:pointer;color:#FFFFFF;',
-        'font-family:' + FONT + ';font-weight:950;font-size:clamp(20px,5.6vw,25px);line-height:1;letter-spacing:.05em;',
+        /* "BEGIN JOURNEY" CTA: >= 20px, Jewel & Gold finish */
+        '.cvp-begin{position:relative;flex:0 0 auto;width:100%;max-width:380px;height:clamp(52px,7.2dvh,64px);',
+        'display:flex;align-items:center;justify-content:center;gap:12px;border-radius:999px;',
+        'border:3px solid ' + C.gold + ';cursor:pointer;color:#FFFFFF;',
+        'font-family:' + FONT + ';font-weight:950;font-size:clamp(20px,5.4vw,24px);line-height:1;letter-spacing:.05em;',
         'background:linear-gradient(180deg,#F73877 0%,' + C.brand + ' 48%,' + C.brandDeep + ' 100%);',
-        'box-shadow:inset 0 2px 0 rgba(255,255,255,.45),inset 0 -5px 12px rgba(40,6,20,.5),0 0 0 2px rgba(255,246,214,.5),0 10px 24px rgba(114,10,52,.38);',
-        'transition:transform .12s ease,box-shadow .12s ease;overflow:hidden}',
+        'box-shadow:inset 0 2px 0 rgba(255,255,255,.45),inset 0 -5px 12px rgba(40,6,20,.5),0 0 0 2px rgba(255,246,214,.5),0 10px 22px rgba(114,10,52,.36);',
+        'transition:transform .12s ease,box-shadow .12s ease;overflow:hidden;margin-top:clamp(2px,.5dvh,6px)}',
         '.cvp-begin::before{content:"";position:absolute;top:0;left:-100%;width:55%;height:100%;',
         'background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-24deg);animation:cvp-sheen 3.4s infinite}',
         '.cvp-begin:active{transform:scale(.97);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 4px 12px rgba(40,6,20,.4)}',
         '.cvp-begin:focus-visible{outline:3px solid ' + C.gold + ';outline-offset:3px}',
-        '.cvp-begin svg{width:26px;height:22px;flex:none;display:block}',
+        '.cvp-begin svg{width:24px;height:20px;flex:none;display:block}',
 
-        /* Dual Mode Buttons (Capped at 15px) */
-        '.cvp-dock{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px}',
-        '.cvp-act{flex:1 1 0;height:clamp(44px,5.8dvh,50px);display:flex;align-items:center;justify-content:center;gap:8px;',
-        'background:rgba(255,255,255,.16);border:1.2px solid rgba(255,255,255,.36);border-radius:999px;',
+        /* Dual Mode Buttons: sitting comfortably inside the viewport, capped at 15px */
+        '.cvp-dock{flex:0 0 auto;width:100%;max-width:380px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px}',
+        '.cvp-act{flex:1 1 0;height:clamp(42px,5.5dvh,48px);display:flex;align-items:center;justify-content:center;gap:7px;',
+        'background:rgba(255,255,255,.18);border:1.2px solid rgba(255,255,255,.4);border-radius:999px;',
         'color:#FFFFFF;cursor:pointer;font-family:' + FONT + ';font-weight:800;font-size:15px;line-height:1;letter-spacing:.02em;',
         'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .15s ease,transform .12s ease}',
-        '.cvp-act:active{background:rgba(255,255,255,.32);transform:scale(.96)}',
+        '.cvp-act:active{background:rgba(255,255,255,.34);transform:scale(.96)}',
         '.cvp-act:focus-visible{outline:2px solid ' + C.goldPale + ';outline-offset:2px}',
-        '.cvp-act svg{width:20px;height:20px;flex:none;stroke:#FFFFFF}',
+        '.cvp-act svg{width:18px;height:18px;flex:none;stroke:#FFFFFF}',
 
-        /* Animations */
-        '.cvp-in{opacity:0;animation:cvp-rise .65s cubic-bezier(.16,1,.3,1) forwards}',
-        '@keyframes cvp-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}',
-        '@keyframes cvp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}',
+        /* Clean animations */
+        '.cvp-in{opacity:0;animation:cvp-rise .6s cubic-bezier(.16,1,.3,1) forwards}',
+        '@keyframes cvp-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
+        '@keyframes cvp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}',
         '@keyframes cvp-glow{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:.88;transform:translateX(-50%) scale(1.06)}}',
         '@keyframes cvp-sheen{0%{left:-100%}25%{left:140%}100%{left:140%}}',
         '@media (prefers-reduced-motion:reduce){.cvp *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}'
       ].join('');
     }
 
-    /* Prestigious 3D Devotional Book SVG */
+    /* 3D Devotional Book SVG */
     function bookSVG() {
       return '<svg class="cvp-book" viewBox="0 0 280 340" aria-hidden="true">' +
         '<defs>' +
@@ -159,27 +155,19 @@
         '<clipPath id="cvpCoverClip"><rect x="34" y="146" width="222" height="170" rx="2"/></clipPath>' +
         '</defs>' +
 
-        /* Ground drop shadow */
         '<ellipse cx="146" cy="334" rx="116" ry="6" fill="#4A051B" opacity=".28"/>' +
-
-        /* Gilded Gold 24K Leaf Pages on right */
         '<rect x="254" y="14" width="16" height="308" rx="2" fill="url(#cvpGoldPagesG)"/>' +
         '<path d="M258 20 V316 M262 20 V316 M266 20 V316" stroke="#664702" stroke-width=".7" opacity=".4"/>' +
-
-        /* Hardcover front board */
         '<rect x="32" y="8" width="226" height="318" rx="4" fill="url(#cvpCoverG)"/>' +
         '<rect x="36" y="12" width="218" height="310" rx="3" fill="none" stroke="url(#cvpGoldBorderG)" stroke-width="1.2" opacity=".65"/>' +
 
-        /* Cover Title Header */
         '<text x="145" y="58" text-anchor="middle" font-family="' + FONT + '" font-style="italic" font-weight="950" font-size="38" fill="' + C.ink + '" letter-spacing="-0.02em">' + TEXT.line1 + '</text>' +
         '<text x="145" y="98" text-anchor="middle" font-family="' + FONT + '" font-style="italic" font-weight="950" font-size="42" fill="' + C.brand + '" letter-spacing="-0.02em">' + TEXT.line2 + '</text>' +
         '<path d="M84 107 C 124 116 166 114 206 105 C 166 111 124 111 84 107 Z" fill="' + C.goldDeep + '"/>' +
 
-        /* Header Sub-rule */
         '<text x="145" y="130" text-anchor="middle" font-family="' + FONT + '" font-weight="800" font-size="11" fill="' + C.brandDark + '" letter-spacing=".16em">A FAITH-BASED DEVOTIONAL</text>' +
         '<path d="M68 138 H222" stroke="url(#cvpGoldBorderG)" stroke-width="1" opacity=".7"/>' +
 
-        /* Cover Artwork Illustration */
         '<g clip-path="url(#cvpCoverClip)">' +
         '<rect x="34" y="146" width="222" height="170" fill="url(#cvpSkyG)"/>' +
         '<ellipse cx="198" cy="226" rx="72" ry="54" fill="url(#cvpSunG)"/>' +
@@ -188,7 +176,6 @@
         '<path d="M148 178 L248 278 M248 178 L148 278" stroke="#FFF7D6" stroke-width="1" opacity=".35"/>' +
         '<path d="M34 246 L68 232 L96 242 L126 226 L156 240 L196 228 L230 244 L256 236 V320 H34Z" fill="#B83765" opacity=".5"/>' +
 
-        /* Believer in Prayer Silhouette */
         '<g fill="' + C.ink + '">' +
         '<circle cx="132" cy="214" r="7.5"/>' +
         '<path d="M125 225 C 122 234 118 244 110 254 L128 254 C 132 246 135 238 138 230 Z"/>' +
@@ -197,17 +184,14 @@
         '<path d="M130 228 L144 238 L147 224 Z"/>' +
         '</g>' +
 
-        /* Summit Cliff */
         '<path d="M34 320 V278 L56 270 L78 276 L94 262 L126 254 L164 258 L186 268 L220 274 L256 266 V320Z" fill="#240715"/>' +
         '<path d="M56 284 L84 280 M130 264 L164 266 M200 284 L236 286" stroke="#5E1635" stroke-width="1.6" opacity=".7"/>' +
         '</g>' +
 
-        /* Author bar on book base */
         '<rect x="44" y="299" width="202" height="17" rx="3" fill="#1C0913" opacity=".95"/>' +
         '<rect x="44" y="299" width="202" height="17" rx="3" fill="none" stroke="url(#cvpGoldBorderG)" stroke-width=".8"/>' +
         '<text x="145" y="311.5" text-anchor="middle" font-family="' + FONT + '" font-weight="800" font-size="8.8" fill="' + C.goldPale + '" letter-spacing=".12em">REV. DR. CHRIS JOHNSON, PhD</text>' +
 
-        /* 3D Spine */
         '<path d="M6 8 Q0 8 0 14 V320 Q0 326 6 326 H34 V8Z" fill="url(#cvpSpineG)"/>' +
         '<path d="M33 8 V326" stroke="#FFFFFF" stroke-opacity=".3" stroke-width="1.2"/>' +
         '<text transform="translate(22 165) rotate(90)" text-anchor="middle" font-family="' + FONT + '" font-style="italic" font-weight="950" font-size="18" fill="#FFFFFF" letter-spacing=".04em">Don\u2019t Give Up</text>' +
@@ -277,55 +261,45 @@
 
         '<div class="cvp-content">' +
 
-        /* Top: Hero 3D Book with guaranteed top clearance */
+        /* 1. Hero 3D Book */
         '<div class="cvp-bookwrap cvp-in" style="animation-delay:.04s">' +
         bookSVG() +
         '</div>' +
 
-        /* Middle Narrative Block: tight, natural spacing (Author -> Title -> Subtitle -> Tagline) */
-        '<div class="cvp-narrative">' +
-        
-        /* Author Pill (15px label capped) */
-        '<div class="cvp-pill cvp-in" style="animation-delay:.15s">' +
+        /* 2. Author Pill (15px label capped) */
+        '<div class="cvp-pill cvp-in" style="animation-delay:.12s">' +
         iconStar() + '<span>' + TEXT.author + '</span>' +
         '</div>' +
 
-        /* Bold, Prominent Title (>= 46px up to 86px) */
-        '<h1 class="cvp-title cvp-in" style="animation-delay:.24s" aria-label="' + TEXT.line1 + ' ' + TEXT.line2 + '">' +
+        /* 3. Bold, Prominent Title (>= 42px up to 72px) */
+        '<h1 class="cvp-title cvp-in" style="animation-delay:.20s" aria-label="' + TEXT.line1 + ' ' + TEXT.line2 + '">' +
         '<span class="cvp-t1">' + TEXT.line1 + '</span>' +
         '<span class="cvp-t2">' + TEXT.line2 + '</span>' +
         '</h1>' +
 
-        /* Subtitle (>= 19px) */
-        '<h2 class="cvp-sub cvp-in" style="animation-delay:.32s">' +
+        /* 4. Subtitle (>= 19px) */
+        '<h2 class="cvp-sub cvp-in" style="animation-delay:.28s">' +
         TEXT.subtitle +
         '</h2>' +
 
-        /* Access Tagline (>= 19px) */
-        '<p class="cvp-tag cvp-in" style="animation-delay:.40s">' +
+        /* 5. Access Tagline (>= 19px) */
+        '<p class="cvp-tag cvp-in" style="animation-delay:.34s">' +
         TEXT.tag +
         '</p>' +
 
-        '</div>' +
-
-        /* Action Cluster: directly connects to the narrative without needless gap */
-        '<div class="cvp-actions">' +
-        
-        /* Primary "BEGIN JOURNEY" CTA (>= 20px) */
-        '<button class="cvp-begin cvp-in" type="button" data-mode="journey" style="animation-delay:.50s" aria-label="' + TEXT.button + '">' +
+        /* 6. Primary "BEGIN JOURNEY" CTA (>= 20px) */
+        '<button class="cvp-begin cvp-in" type="button" data-mode="journey" style="animation-delay:.42s" aria-label="' + TEXT.button + '">' +
         '<span>' + TEXT.button + '</span>' + iconArrow() +
         '</button>' +
 
-        /* Dual Bottom Actions (15px label capped) with guaranteed bottom navigation bar clearance */
-        '<div class="cvp-dock cvp-in" style="animation-delay:.58s">' +
+        /* 7. Dual Bottom Actions (15px label capped) with guaranteed on-screen visibility */
+        '<div class="cvp-dock cvp-in" style="animation-delay:.50s">' +
         '<button class="cvp-act" type="button" data-mode="online" aria-label="' + TEXT.online + '">' +
         iconBook() + '<span>' + TEXT.online + '</span>' +
         '</button>' +
         '<button class="cvp-act" type="button" data-mode="offline" aria-label="' + TEXT.offline + '">' +
         iconDownload() + '<span>' + TEXT.offline + '</span>' +
         '</button>' +
-        '</div>' +
-
         '</div>' +
 
         '</div>' +
@@ -352,7 +326,7 @@
     }
 
     window.CoverPage = {
-      version: '3.3.0-safe-clearance',
+      version: '3.4.0-zero-cutoff',
       render: render,
       TEXT: TEXT,
       C: C
