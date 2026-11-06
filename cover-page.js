@@ -53,22 +53,18 @@
         '.cvp-author{margin-top:12px;font-size:20px;font-weight:600;line-height:1.3;letter-spacing:.06em;color:#FFFFFF;text-shadow:0 2px 10px rgba(110,10,46,.5)}',
         '.cvp-stage{position:relative;width:100%;height:152px;flex:none}',
         '.cvp-pod{position:absolute;left:0;right:0;bottom:0;width:100%;height:132px;display:block}',
-        '.cvp-btn{position:absolute;left:7%;right:7%;bottom:54px;height:66px;display:flex;align-items:center;justify-content:center;gap:16px;',
+        '.cvp-btn{position:absolute;left:20px;right:20px;bottom:54px;height:66px;display:flex;align-items:center;justify-content:center;gap:16px;',
         'border:3px solid #E9B93C;border-radius:33px;cursor:pointer;color:#FFFFFF;font:700 22px/1 Roboto,Inter,system-ui,sans-serif;letter-spacing:.08em;',
         'background:linear-gradient(180deg,#F23E78 0%,' + C.brandDark + ' 52%,#7A0D38 100%);',
         'box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -6px 14px rgba(58,10,31,.45),0 0 0 2px rgba(255,243,196,.35),0 10px 26px rgba(58,10,31,.5);',
         'animation:cvpglow 2.6s ease-in-out infinite;padding:0 12px}',
         '.cvp-btn:active{transform:scale(.97);filter:brightness(.95)}',
         '.cvp-btn svg{width:34px;height:24px;flex:none;display:block}',
-        '.cvp-drift1{animation:cvpdrift 26s ease-in-out infinite alternate}',
-        '.cvp-drift2{animation:cvpdrift 34s ease-in-out -9s infinite alternate-reverse}',
-        '.cvp-drift3{animation:cvpdrift 30s ease-in-out -4s infinite alternate}',
         '.cvp-sway{transform-origin:180px -20px;animation:cvpsway 14s ease-in-out infinite alternate}',
         '.cvp-tw{animation:cvptw 3.2s ease-in-out infinite}',
         '.cvp-wave{animation:cvpwave 7s ease-in-out infinite alternate}',
         '.cvp-shine{animation:cvpshine 5s ease-in-out infinite}',
         '.cvp-in{opacity:0;animation:cvpup .9s cubic-bezier(.2,0,0,1) forwards}',
-        '@keyframes cvpdrift{from{transform:translateX(-14px)}to{transform:translateX(14px)}}',
         '@keyframes cvpsway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}',
         '@keyframes cvptw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}',
         '@keyframes cvpwave{from{transform:translateX(-12px)}to{transform:translateX(12px)}}',
@@ -81,10 +77,6 @@
       ].join('');
     }
 
-    function cloud(x, y, s, o, cls) {
-      return '<g class="' + cls + '"><g transform="translate(' + x + ' ' + y + ') scale(' + s + ')" filter="url(#cvpBlur)" opacity="' + o + '" fill="' + C.cloud + '">' +
-        '<circle cx="0" cy="0" r="34"/><circle cx="38" cy="-14" r="44"/><circle cx="82" cy="0" r="38"/><circle cx="116" cy="14" r="28"/><ellipse cx="58" cy="26" rx="86" ry="22"/></g></g>';
-    }
     function spark(x, y, s, d) {
       return '<path class="cvp-tw" style="animation-delay:' + d + 's;transform-box:fill-box;transform-origin:center" transform="translate(' + x + ' ' + y + ') scale(' + s + ')" ' +
         'd="M0 -7 L1.8 -1.8 L7 0 L1.8 1.8 L0 7 L-1.8 1.8 L-7 0 L-1.8 -1.8Z" fill="' + C.goldPale + '"/>';
@@ -102,10 +94,9 @@
       }
       return '<svg class="cvp-art" viewBox="0 0 360 740" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
         '<defs>' +
-        '<radialGradient id="cvpSun" cx="50%" cy="0%" r="75%"><stop offset="0" stop-color="#FFFFFF" stop-opacity="1"/><stop offset=".16" stop-color="#FFF3C4" stop-opacity=".95"/><stop offset=".42" stop-color="#FFC0D3" stop-opacity=".45"/><stop offset="1" stop-color="' + C.brand + '" stop-opacity="0"/></radialGradient>' +
+        '<radialGradient id="cvpSun" cx="50%" cy="0%" r="75%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".8"/><stop offset=".2" stop-color="' + C.goldPale + '" stop-opacity=".6"/><stop offset=".5" stop-color="' + C.brand + '" stop-opacity="0"/></radialGradient>' +
         '<linearGradient id="cvpRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".6"/><stop offset=".7" stop-color="#FFE9F1" stop-opacity=".12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>' +
         '<linearGradient id="cvpRib" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".5" stop-color="' + C.goldPale + '" stop-opacity=".95"/><stop offset="1" stop-color="' + C.gold + '" stop-opacity="0"/></linearGradient>' +
-        '<filter id="cvpBlur" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="5.5"/></filter>' +
         '<filter id="cvpBlurS"><feGaussianBlur stdDeviation="14"/></filter>' +
         '</defs>' +
         '<ellipse cx="180" cy="-20" rx="300" ry="260" fill="url(#cvpSun)"/>' +
@@ -117,8 +108,6 @@
         '<path d="M-14 350 C 40 316 110 344 134 420 S 54 500 -26 462" fill="none" stroke="url(#cvpRib)" stroke-width="1.2" opacity=".7"/>' +
         '<path d="M382 566 C 302 520 240 556 208 606 S 296 650 392 626" fill="rgba(255,255,255,.07)" stroke="url(#cvpRib)" stroke-width="2.2"/>' +
         '<path d="M390 590 C 318 548 262 576 236 612 S 312 640 394 618" fill="none" stroke="url(#cvpRib)" stroke-width="1.2" opacity=".7"/>' +
-        cloud(-52, 150, 1.05, 0.9, 'cvp-drift1') + cloud(262, 92, 0.5, 0.6, 'cvp-drift2') + cloud(268, 338, 0.95, 0.9, 'cvp-drift3') +
-        cloud(-60, 604, 1.25, 0.95, 'cvp-drift2') + cloud(236, 640, 1.15, 0.95, 'cvp-drift1') +
         spark(60, 250, 1.1, 0) + spark(306, 214, 0.9, 1.1) + spark(120, 130, 0.7, 2.1) + spark(250, 150, 0.8, 0.6) + spark(40, 430, 0.8, 1.6) + spark(330, 470, 1, 2.4) +
         spark(180, 40, 1.3, 0.3) +
         '<rect x="0" y="690" width="360" height="60" fill="' + C.brandDeep + '" opacity=".35"/>' +
