@@ -1,7 +1,7 @@
 /* cover-page.js - Professional, elevated mobile cover for "Don't Give Up!"
  *
  * STANDALONE & ZERO-DEPENDENCY
- * Mobile-only layout guaranteed to never cut off on ANY Android phone.
+ * Mobile-only layout with perfect contrast, zero cut-off, and generous bottom gap.
  * Contract: window.CoverPage.render(containerElement, onBegin)
  * Dispatches "coverpage:begin" CustomEvent on container.
  */
@@ -40,39 +40,32 @@
 
     function css() {
       return [
-        /* Root container: strictly 100dvw x 100dvh, no scroll, no cut-off */
+        /* Full viewport phone container */
         '.cvp{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;width:100dvw;height:100dvh;min-height:100vh;overflow:hidden;',
         'background:linear-gradient(180deg,#FFFFFF 0%,#FFF8FA 35%,' + C.blushSoft + ' 65%,' + C.blush + ' 100%);',
         'color:' + C.ink + ';font-family:' + FONT + ';-webkit-user-select:none;user-select:none;',
-        '-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;display:flex;flex-direction:column}',
+        '-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;',
+        'display:flex;flex-direction:column;justify-content:space-between}',
         
         '.cvp *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}',
 
-        /* Ambient halo behind book */
-        '.cvp-ambient{position:absolute;top:max(20px,calc(env(safe-area-inset-top,0px) + 12px));left:50%;transform:translateX(-50%);',
+        /* Ambient light halo behind book */
+        '.cvp-ambient{position:absolute;top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));left:50%;transform:translateX(-50%);',
         'width:min(90dvw,340px);height:min(28dvh,220px);border-radius:50%;pointer-events:none;',
         'background:radial-gradient(circle,rgba(255,211,66,.38) 0%,rgba(223,30,90,.14) 50%,transparent 72%);',
         'filter:blur(24px);animation:cvp-glow 4.8s ease-in-out infinite}',
 
-        /* Wave Footer Graphic: sits behind the bottom actions */
-        '.cvp-waves{position:absolute;left:0;bottom:0;width:100%;height:clamp(145px,22dvh,190px);pointer-events:none;z-index:1}',
-        '.cvp-waves svg{width:100%;height:100%;display:block}',
-
-        /* Main Content Column:
-           - Sized to fit comfortably in a single screen without ANY vertical overflow
-           - Top padding guarantees clearance from Android camera punch-hole / notch
-           - Bottom padding guarantees full visibility above Android navigation pill/bar */
-        '.cvp-content{position:relative;z-index:10;width:100%;height:100%;display:flex;flex-direction:column;',
+        /* Upper content body */
+        '.cvp-body{position:relative;z-index:10;flex:1 1 auto;display:flex;flex-direction:column;',
         'align-items:center;text-align:center;justify-content:center;',
-        'gap:clamp(6px,1.3dvh,14px);',
-        'padding-top:max(24px,calc(env(safe-area-inset-top,0px) + 18px));',
-        'padding-bottom:max(24px,calc(env(safe-area-inset-bottom,0px) + 18px));',
-        'padding-left:clamp(16px,5vw,24px);padding-right:clamp(16px,5vw,24px)}',
+        'gap:clamp(5px,1dvh,10px);',
+        'padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));',
+        'padding-left:clamp(16px,5vw,24px);padding-right:clamp(16px,5vw,24px);padding-bottom:clamp(4px,.8dvh,8px)}',
 
-        /* Hero 3D Book: large & crisp, but budgeted so nothing overflows */
+        /* Hero 3D Book: prominent, crisp, well-proportioned */
         '.cvp-bookwrap{position:relative;flex:0 0 auto;display:flex;justify-content:center;align-items:center;',
         'margin:0 auto;perspective:1000px}',
-        '.cvp-book{height:clamp(116px,18dvh,160px);width:auto;display:block;',
+        '.cvp-book{height:clamp(126px,19dvh,168px);width:auto;display:block;',
         'filter:drop-shadow(0 14px 22px rgba(114,10,52,.32)) drop-shadow(0 4px 8px rgba(0,0,0,.12));',
         'animation:cvp-float 5s ease-in-out infinite}',
 
@@ -82,9 +75,9 @@
         'color:' + C.brandDark + ';font-size:15px;font-weight:800;letter-spacing:.02em;line-height:1}',
         '.cvp-pill svg{width:14px;height:14px;fill:' + C.brand + ';flex:none}',
 
-        /* Monumental Title: prominent, bold (>= 42px up to 72px) */
+        /* Title: prominent, bold (>= 42px up to 72px) */
         '.cvp-title{flex:0 0 auto;font-family:' + FONT + ';font-style:italic;font-weight:950;line-height:.92;',
-        'letter-spacing:-.035em;font-size:clamp(42px,min(14vw,7.2dvh),72px)}',
+        'letter-spacing:-.035em;font-size:clamp(42px,min(14.5vw,7.4dvh),72px)}',
         '.cvp-t1{display:block;color:' + C.ink + ';text-shadow:0 1px 2px rgba(21,11,28,.1)}',
         '.cvp-t2{display:block;color:' + C.brand + ';text-shadow:0 3px 12px rgba(223,30,90,.22)}',
 
@@ -94,10 +87,10 @@
 
         /* Access Tagline: strictly >= 19px */
         '.cvp-tag{flex:0 0 auto;font-size:clamp(19px,4.3vw,21px);font-weight:700;color:' + C.ink + ';line-height:1.24;',
-        'text-wrap:balance;max-width:94%}',
+        'text-wrap:balance;max-width:96%}',
 
         /* "BEGIN JOURNEY" CTA: >= 20px, Jewel & Gold finish */
-        '.cvp-begin{position:relative;flex:0 0 auto;width:100%;max-width:380px;height:clamp(52px,7.2dvh,64px);',
+        '.cvp-begin{position:relative;flex:0 0 auto;width:100%;max-width:380px;height:clamp(52px,7.2dvh,62px);',
         'display:flex;align-items:center;justify-content:center;gap:12px;border-radius:999px;',
         'border:3px solid ' + C.gold + ';cursor:pointer;color:#FFFFFF;',
         'font-family:' + FONT + ';font-weight:950;font-size:clamp(20px,5.4vw,24px);line-height:1;letter-spacing:.05em;',
@@ -110,18 +103,31 @@
         '.cvp-begin:focus-visible{outline:3px solid ' + C.gold + ';outline-offset:3px}',
         '.cvp-begin svg{width:24px;height:20px;flex:none;display:block}',
 
-        /* Dual Mode Buttons: sitting comfortably inside the viewport, capped at 15px */
-        '.cvp-dock{flex:0 0 auto;width:100%;max-width:380px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px}',
-        '.cvp-act{flex:1 1 0;height:clamp(42px,5.5dvh,48px);display:flex;align-items:center;justify-content:center;gap:7px;',
-        'background:rgba(255,255,255,.18);border:1.2px solid rgba(255,255,255,.4);border-radius:999px;',
-        'color:#FFFFFF;cursor:pointer;font-family:' + FONT + ';font-weight:800;font-size:15px;line-height:1;letter-spacing:.02em;',
-        'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .15s ease,transform .12s ease}',
-        '.cvp-act:active{background:rgba(255,255,255,.34);transform:scale(.96)}',
-        '.cvp-act:focus-visible{outline:2px solid ' + C.goldPale + ';outline-offset:2px}',
-        '.cvp-act svg{width:18px;height:18px;flex:none;stroke:#FFFFFF}',
+        /* Dedicated Crimson Footer Dock:
+           Solid crimson background for 100% button contrast,
+           with generous bottom padding to keep buttons well above Android navigation bars */
+        '.cvp-footer{position:relative;z-index:20;flex:0 0 auto;width:100%;',
+        'background:linear-gradient(180deg,#E82467 0%,' + C.brandDark + ' 50%,' + C.plum + ' 100%);',
+        'padding-top:clamp(12px,1.8dvh,18px);',
+        'padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(32px,5.2dvh,52px));',
+        'padding-left:16px;padding-right:16px;',
+        'display:flex;flex-direction:column;align-items:center;box-shadow:0 -6px 20px rgba(179,18,74,.25)}',
 
-        /* Clean animations */
-        '.cvp-in{opacity:0;animation:cvp-rise .6s cubic-bezier(.16,1,.3,1) forwards}',
+        /* Curved wave topper on the footer */
+        '.cvp-wave-top{position:absolute;left:0;top:-28px;width:100%;height:30px;pointer-events:none;display:block}',
+
+        /* Dual Action Buttons inside the crimson footer: 100% contrast & fully visible */
+        '.cvp-dock{width:100%;max-width:380px;display:flex;align-items:center;justify-content:space-between;gap:12px}',
+        '.cvp-act{flex:1 1 0;height:clamp(46px,6dvh,54px);display:flex;align-items:center;justify-content:center;gap:8px;',
+        'background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.45);border-radius:999px;',
+        'color:#FFFFFF;cursor:pointer;font-family:' + FONT + ';font-weight:800;font-size:15px;line-height:1;letter-spacing:.02em;',
+        'backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .15s ease,transform .12s ease}',
+        '.cvp-act:active{background:rgba(255,255,255,.32);transform:scale(.96)}',
+        '.cvp-act:focus-visible{outline:2px solid ' + C.goldPale + ';outline-offset:2px}',
+        '.cvp-act svg{width:20px;height:20px;flex:none;stroke:#FFFFFF}',
+
+        /* Animations */
+        '.cvp-in{opacity:0;animation:cvp-rise .55s cubic-bezier(.16,1,.3,1) forwards}',
         '@keyframes cvp-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
         '@keyframes cvp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}',
         '@keyframes cvp-glow{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:.88;transform:translateX(-50%) scale(1.06)}}',
@@ -202,20 +208,12 @@
         '</svg>';
     }
 
-    /* Wave footer backdrop with brand crimson */
-    function waveBackdrop() {
-      return '<div class="cvp-waves" aria-hidden="true">' +
-        '<svg viewBox="0 0 360 180" preserveAspectRatio="none">' +
-        '<defs>' +
-        '<linearGradient id="cvpWaveCrimson" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0" stop-color="#E82467"/><stop offset="55%" stop-color="' + C.brandDark + '"/><stop offset="100%" stop-color="' + C.plum + '"/>' +
-        '</linearGradient>' +
-        '</defs>' +
-        '<path d="M0 76 C 70 28 150 94 230 62 C 290 38 330 14 360 6 V180 H0Z" fill="' + C.brand + '" opacity=".18"/>' +
-        '<path d="M0 36 C 65 10 135 44 215 28 C 275 16 325 6 360 0 V180 H0Z" fill="url(#cvpWaveCrimson)"/>' +
-        '<path d="M0 46 C 72 18 144 52 224 36 C 284 24 328 12 360 8" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.4"/>' +
-        '</svg>' +
-        '</div>';
+    /* Seamless wave transition SVG sitting atop the crimson footer */
+    function waveTopper() {
+      return '<svg class="cvp-wave-top" viewBox="0 0 360 30" preserveAspectRatio="none" aria-hidden="true">' +
+        '<path d="M0 20 C 60 4 140 28 220 14 C 275 4 320 0 360 0 V30 H0Z" fill="#E82467"/>' +
+        '<path d="M0 24 C 65 8 145 30 225 18 C 280 8 325 2 360 2" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.2"/>' +
+        '</svg>';
     }
 
     function iconArrow() {
@@ -257,9 +255,9 @@
       container.innerHTML =
         '<section class="cvp" role="region" aria-label="Devotional eBook Cover">' +
         '<div class="cvp-ambient" aria-hidden="true"></div>' +
-        waveBackdrop() +
 
-        '<div class="cvp-content">' +
+        /* Upper Body: Book -> Author -> Title -> Subtitle -> Tagline -> Begin CTA */
+        '<div class="cvp-body">' +
 
         /* 1. Hero 3D Book */
         '<div class="cvp-bookwrap cvp-in" style="animation-delay:.04s">' +
@@ -288,12 +286,17 @@
         '</p>' +
 
         /* 6. Primary "BEGIN JOURNEY" CTA (>= 20px) */
-        '<button class="cvp-begin cvp-in" type="button" data-mode="journey" style="animation-delay:.42s" aria-label="' + TEXT.button + '">' +
+        '<button class="cvp-begin cvp-in" type="button" data-mode="journey" style="animation-delay:.40s" aria-label="' + TEXT.button + '">' +
         '<span>' + TEXT.button + '</span>' + iconArrow() +
         '</button>' +
 
-        /* 7. Dual Bottom Actions (15px label capped) with guaranteed on-screen visibility */
-        '<div class="cvp-dock cvp-in" style="animation-delay:.50s">' +
+        '</div>' +
+
+        /* Dedicated Solid Crimson Footer Dock:
+           Houses the dual action buttons with 100% crystal-clear contrast and generous bottom clearance */
+        '<div class="cvp-footer cvp-in" style="animation-delay:.46s">' +
+        waveTopper() +
+        '<div class="cvp-dock">' +
         '<button class="cvp-act" type="button" data-mode="online" aria-label="' + TEXT.online + '">' +
         iconBook() + '<span>' + TEXT.online + '</span>' +
         '</button>' +
@@ -301,8 +304,8 @@
         iconDownload() + '<span>' + TEXT.offline + '</span>' +
         '</button>' +
         '</div>' +
-
         '</div>' +
+
         '</section>';
 
       var btns = container.querySelectorAll('.cvp-begin, .cvp-act');
@@ -326,7 +329,7 @@
     }
 
     window.CoverPage = {
-      version: '3.4.0-zero-cutoff',
+      version: '3.5.0-solid-footer-contrast',
       render: render,
       TEXT: TEXT,
       C: C
