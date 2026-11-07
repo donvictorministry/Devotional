@@ -12,7 +12,7 @@
     kicker: 'A Christian Devotional',
 
     /* LOGO */
-    logo: 'https://app.donvictorministry.org.ng/book/ebook-icon.png',
+    logo: 'https://app.donvictorministry.org.ng/Devotional/ebook-icon.png',
 
     about: [
   "More than a devotional, this is a heartfelt reminder that your present struggles do not define your future. No matter how dark the valley may seem, God's faithfulness remains constant.",
