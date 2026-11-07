@@ -1,6 +1,6 @@
 /* sw.js - offline support. Bump CACHE when you change any file (for example ebook-v2). */
 var CACHE = 'ebook-v5.4';
-var SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'book.js', 'lock.js', 'icons.js', 'cover-page.js', 'support-modal.js', 'notepad.js', 'manifest.json'];
+var SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'book.js', 'lock.js', 'icons.js', 'cover-page.js', 'support-modal.js', 'notepad.js', 'dedication.js', 'manifest.json'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
