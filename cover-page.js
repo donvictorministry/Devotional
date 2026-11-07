@@ -109,7 +109,7 @@
         '.cvp-footer{position:relative;z-index:20;flex:0 0 auto;width:100%;',
         'background:linear-gradient(180deg,#E82467 0%,' + C.brandDark + ' 50%,' + C.plum + ' 100%);',
         'padding-top:clamp(12px,1.8dvh,18px);',
-        'padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(32px,5.2dvh,52px));',
+        'padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(50px,7.5dvh,75px));',
         'padding-left:16px;padding-right:16px;',
         'display:flex;flex-direction:column;align-items:center;box-shadow:0 -6px 20px rgba(179,18,74,.25)}',
 
