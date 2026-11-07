@@ -4,7 +4,7 @@
   'use strict';
 
   var CFG = {
-    API_URL: 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE',
+    API_URL: 'https://script.google.com/macros/s/AKfycby8udSzdfXAtT2rjBrEHuEQ9HNcIWfv9OW3XPJowKmKx2C-qifBxxQ55Q0qsL3IZzkd9g/exec',
     PRODUCT: 'dont-give-up',     /* must match PRODUCT in the Settings sheet */
     VERIFY_HOURS: 6,             /* how often an unlocked device re-checks its code (when online) */
     TIMEOUT_MS: 25000
@@ -21,8 +21,8 @@
     missing: 'Enter your access code.',
     network: 'No internet connection. You need to be online the first time you unlock the book.',
     timeout: 'The server took too long to answer. Check your connection and try again.',
-    not_configured: 'The app is not connected yet. The admin must paste the Web App URL into lock.js.',
-    not_installed: 'The database is not installed yet. The admin must run Install / Repair Database.',
+    not_configured: 'The app is not connected yet.',
+    not_installed: 'The database is not installed yet.',
     server: 'Something went wrong on the server. Please try again in a moment.'
   };
 
