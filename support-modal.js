@@ -54,7 +54,7 @@
           { icon: 'servers', title: 'Servers', text: 'Covers essential infrastructure costs.' },
           { icon: 'group', title: 'Staff salaries', text: 'supports those laboring daily to impact lives.' },
           { icon: 'office', title: 'Ministry office', text: 'Covers daily operating costs.' },
-          { icon: 'globe', title: 'More outreach', text: 'New devotionals and apps for more hearts.' }
+          { icon: 'globe', title: 'More resources', text: 'Developing digital solutions and writing inspirational materials.' }
         ]
       },
 
@@ -72,7 +72,7 @@
       /* The Check out button and the contact box it opens */
       checkout: {
         button: 'Check out',
-        boxTitle: 'Kindly reach out for payment details.',
+        boxTitle: 'Kindly reach out for payment details to complete your support.',
         boxText: 'Choose any link. We will send your access code once your support is received.',
         close: 'Close',
         /* {amount} is replaced with what the person picked */
