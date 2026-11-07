@@ -34,25 +34,25 @@
 
       /* STEP 1: what they get. Icon names are in icons.js. */
       benefits: {
-        hero: { icon: 'edit', title: 'Premium Notepad', text: 'Take notes on the go, secure them with a PIN, and share them easily. Import and export your private information whenever you need it.', badge: 'Powerful' },
+        hero: { icon: 'edit', title: 'Premium Notepad', text: 'Take notes on the go, secure them with a PIN, and share easily.', badge: 'Powerful' },
         items: [
-          { icon: 'book', title: 'Ebook Chapters and declarations' },
+          { icon: 'book', title: 'Ebook Chapters & declarations' },
           { icon: 'todo', title: 'Prayer to-do list' },
           { icon: 'offline', title: 'Read offline anywhere' },
           { icon: 'moon', title: 'Dark mode and text size' },
           { icon: 'star', title: 'New features coming soon' },
-          { icon: 'heart', title: 'Priority across our apps ecosystem' }
+          { icon: 'heart', title: 'Priority across our ecosystem' }
         ]
       },
 
       /* STEP 2: what their support achieves */
       impact: {
-        heading: 'Making a Difference Together',
-        text: 'Your generosity helps us sustain accessible digital technologies that impact lives worldwide. Every contribution matters.',
+        heading: 'Making a Difference Together!',
+        text: 'Your generosity helps us sustain this vision and impact more lives globally.',
         items: [
           { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and fast.' },
           { icon: 'servers', title: 'Servers', text: 'Powers every unlock and update.' },
-          { icon: 'group', title: 'Staff salaries', text: 'Supports those who build, write and pray.' },
+          { icon: 'group', title: 'Staff salaries', text: 'supports those laboring daily to impact lives.' },
           { icon: 'office', title: 'Ministry office', text: 'Covers daily operating costs.' },
           { icon: 'globe', title: 'More outreach', text: 'New devotionals and apps for more hearts.' }
         ]
@@ -72,7 +72,7 @@
       /* The Check out button and the contact box it opens */
       checkout: {
         button: 'Check out',
-        boxTitle: 'Reach out for account details to complete',
+        boxTitle: 'Kindly reach out for payment details.',
         boxText: 'Choose any link. We will send your access code once your support is received.',
         close: 'Close',
         /* {amount} is replaced with what the person picked */
