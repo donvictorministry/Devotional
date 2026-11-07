@@ -1,43 +1,45 @@
-/* book.js - book metadata, offline copy of the unlocked content, and the text parser.
-   The chapters themselves live in the "Book" sheet and arrive only after a valid unlock.
-   Edit the placeholder values in META below. */
+/* book.js - book metadata, offline copy of the unlocked content, and the text parser.  */
+
 (function () {
   'use strict';
 
   var META = {
     title: "Don't Give Up!",
     subtitle: 'A Journey of Faith and Perseverance',
-    author: 'Rev. Dr. Chris Johnson, PhD',
-    edition: 'Edition 1.0, 2025',
-    kicker: 'A Christian devotional',
+    author: 'Rev. Don Victor, PhD',
+    edition: 'Edition 1.0, 2026',
+    kicker: 'A Christian Devotional',
 
-    /* LOGO: paste your hosted logo image URL here. It is used in the header, both
-       side menus and the front cover, always inside a circle with a rotating gear ring. */
-    logo: 'https://REPLACE-WITH-YOUR-HOSTED-URL/logo.png',
+    /* LOGO */
+    logo: 'https://app.donvictorministry.org.ng/book/ebook-icon.png',
 
     about: [
-      "Don't Give Up! is a faith-based devotional for anyone walking through a dark valley. Drawing on Jeremiah 29:11 and the stories of Joseph, David, the woman with the issue of blood, and Paul and Silas, it shows how God's faithfulness prevails in every season of struggle.",
-      'Each chapter ends with a short declaration you can speak aloud. Read one chapter at a time, or follow the Table of Contents in any order.'
-    ],
+      "Don't Give Up! is more than a devotional; it is a heartfelt reminder that your present struggles do not define your future, and your darkest season is never beyond the reach of God's faithfulness.",
+      'Inspired by Jeremiah 29:11 and the powerful biblical stories of Joseph, David, the woman with the issue of blood, and Paul and Silas, this devotional offers hope, encouragement, and renewed strength for anyone navigating life's valleys. Through their experiences, you will discover that delays are not denials, setbacks are not the end, and even in seasons when God seems silent, He is still at work.'
+      'Whether you are battling disappointment, facing uncertainty, enduring hardship, or simply struggling to find the strength to keep going, these pages will encourage you to hold on to God's promises, trust His timing, and keep your faith alive.'
+      'Each chapter concludes with a short, faith-filled declaration designed to strengthen your spirit and help you speak God's promises over your life.'
+      'Read one chapter at a time, or explore the chapters in any order using the Table of Contents. Wherever you begin, let each reading remind you of one enduring truth: Your story is not over. God is still faithful.' 
+       'Don't Give Up! © Dr. Don Victor, PhD.' 
+ 
+  ],
 
-    /* Contact: replace every placeholder below */
-    email: 'ministry@ebook.org',
-    phone: '+10000000000',
-    whatsapp: '10000000000',
-    facebook: 'https://www.facebook.com/YOUR-PAGE',
+    /* Contact */
+    email: 'donvictorministry@gmail.com',
+    phone: '+2347035794649',
+    whatsapp: '2348086590253',
+    facebook: 'https://www.facebook.com/Rev.DonVictor',
 
-    /* Link people get when they tap Share App. Leave empty to share the current page. */
+    /* Link people get when they tap Share App.*/
     shareUrl: '',
-    shareText: "Read \"Don't Give Up!\" by Rev. Dr. Chris Johnson.",
+    shareText: "Read \"Don't Give Up!\" by Rev. Don Victor, PhD.",
 
     developer: {
-      name: 'Developer Name',
-      role: 'Software Developer',
-      bio: 'Write a short bio here. Describe who built this app and why.',
-      photo: 'https://REPLACE-WITH-YOUR-HOSTED-URL/developer.png'
+      name: 'Rev. Don Victor, PhD',
+      role: 'Prophet of God | Founder & Visionary | Trainer | Researcher | Full Stack Developer',
+      bio: 'Dr. Don Victor is an ordained Reverend Minister of the Lord Jesus Christ, scholar, interdisciplinary researcher, trainer, web developer, and software engineer. His work integrates Christian ministry, theological scholarship, education, research, and technological innovation to advance the Gospel and create meaningful global impact. Driven by a vision to reach six million souls for Christ, he has developed and founded diverse ministries, educational initiatives, and technology-driven platforms serving both online and offline communities.',
+      photo: 'https://app.donvictorministry.org.ng/gospel/dvg-logo-pic.png'
     }
   };
-
 
   /* =====================================================================
      INFO PAGES (left menu). Edit the words freely.
