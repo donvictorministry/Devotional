@@ -196,7 +196,7 @@
 
         '<rect x="44" y="299" width="202" height="17" rx="3" fill="#1C0913" opacity=".95"/>' +
         '<rect x="44" y="299" width="202" height="17" rx="3" fill="none" stroke="url(#cvpGoldBorderG)" stroke-width=".8"/>' +
-        '<text x="145" y="311.5" text-anchor="middle" font-family="' + FONT + '" font-weight="800" font-size="8.8" fill="' + C.goldPale + '" letter-spacing=".12em">REV. DR. CHRIS JOHNSON, PhD</text>' +
+        '<text x="145" y="311.5" text-anchor="middle" font-family="' + FONT + '" font-weight="800" font-size="8.8" fill="' + C.goldPale + '" letter-spacing=".12em">REV. DR. DON VICTOR, PhD</text>' +
 
         '<path d="M6 8 Q0 8 0 14 V320 Q0 326 6 326 H34 V8Z" fill="url(#cvpSpineG)"/>' +
         '<path d="M33 8 V326" stroke="#FFFFFF" stroke-opacity=".3" stroke-width="1.2"/>' +
