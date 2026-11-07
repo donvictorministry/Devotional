@@ -1,5 +1,6 @@
-/* book.js - book metadata, offline copy of the unlocked content, and the text parser.  */
-
+/* book.js - book metadata, offline copy of the unlocked content, and the text parser.
+   The chapters themselves live in the "Book" sheet and arrive only after a valid unlock.
+   Edit the placeholder values in META below. */
 (function () {
   'use strict';
 
@@ -10,11 +11,10 @@
     edition: 'Edition 1.0, 2026',
     kicker: 'A Christian Devotional',
 
- /* LOGO */
-    
-logo: 'https://app.donvictorministry.org.ng/book/ebook-icon.png',
+    /* LOGO */
+    logo: 'https://app.donvictorministry.org.ng/book/ebook-icon.png',
 
-about: [
+    about: [
   "More than a devotional, this is a heartfelt reminder that your present struggles do not define your future. No matter how dark the valley may seem, God's faithfulness remains constant.",
 
   "𝗕𝗜𝗕𝗟𝗜𝗖𝗔𝗟 𝗜𝗡𝗦𝗣𝗜𝗥𝗔𝗧𝗜𝗢𝗡\n\nDrawing on 𝗝𝗲𝗿𝗲𝗺𝗶𝗮𝗵 𝟮𝟵:𝟭𝟭 and the inspiring stories of Joseph, David, the woman with the issue of blood, and Paul and Silas, this devotional reveals how God remains faithful through life's most difficult seasons.",
@@ -30,7 +30,7 @@ about: [
   "𝗬𝗢𝗨𝗥 𝗦𝗧𝗢𝗥𝗬 𝗜𝗦 𝗡𝗢𝗧 𝗢𝗩𝗘𝗥\n\nGod is still faithful. Don't give up!\n\nWishing you a rewarding and enriching reading encounter with God."
 ],
 
-/* Contact */
+    /* Contact */
     email: 'donvictorministry@gmail.com',
     phone: '+2347035794649',
     whatsapp: '2348086590253',
@@ -46,6 +46,66 @@ about: [
       bio: 'Dr. Don Victor is an ordained Reverend Minister of the Lord Jesus Christ, scholar, interdisciplinary researcher, trainer, web developer, and software engineer. His work integrates Christian ministry, theological scholarship, education, research, and technological innovation to advance the Gospel and create meaningful global impact. Driven by a vision to reach six million souls for Christ, he has developed and founded diverse ministries, educational initiatives, and technology-driven platforms serving both online and offline communities.',
       photo: 'https://app.donvictorministry.org.ng/gospel/dvg-logo-pic.png'
     }
+  };
+
+  /* =====================================================================
+     INFO PAGES (left menu). Edit the words freely.
+     Each page is a list of blocks:
+       ['h',  'Heading']              ['p', 'Paragraph']
+       ['ul', ['item', 'item']]       ['ol', ['step', 'step']]    (bullets / numbers)
+       ['about']  the About text above   ['dev']  developer card
+       ['cta']    the four contact circles   ['cta-code']  contact circles with the access-code message
+     In any text: {title} {author} {edition} {email} {phone} are filled in automatically,
+     and **double stars** make bold text.
+     ===================================================================== */
+  var PAGES = {
+    about: { title: 'About the Book', blocks: [
+      ['h', '{title}'],
+      ['about'],
+      ['p', '**Author:** {author}'],
+      ['p', '**Edition:** {edition}'],
+      ['cta']
+    ] },
+    dev: { title: 'About Developer', center: true, blocks: [
+      ['dev'],
+      ['cta']
+    ] },
+    how: { title: 'How to Use', blocks: [
+      ['h', 'Unlock'],
+      ['ol', ['Type the access code you received and tap Unlock Book.', 'Each code works on one device only. Do not share it.']],
+      ['h', 'Move through the book'],
+      ['ul', ['**TOC** opens the Table of Contents.', '**Home** returns to the home page.', '**Prev** and **Next** turn the page.', '**Dark** switches dark and light mode.']],
+      ['h', 'Menus'],
+      ['ul', ['The left menu has information about the book and the ministry.', 'The right menu has the notepad, text size, dark mode, your to-do list, Install App and Share App.']],
+      ['h', 'Offline'],
+      ['p', 'After you unlock the book once, it works without internet. It checks your access again when you are online.']
+    ] },
+    terms: { title: 'Terms of Use', blocks: [
+      ['h', 'Copyright'],
+      ['p', 'Copyright 2025 {author}. All rights reserved.'],
+      ['h', 'One-device license'],
+      ['p', 'Your access code unlocks this book on one device only, for your personal reading and spiritual growth.'],
+      ['h', 'You may'],
+      ['ul', ['Read the book on your unlocked device.', 'Quote short passages with full credit for non-commercial ministry use.', 'Share the app link so others can ask for their own code.']],
+      ['h', 'You may not'],
+      ['ul', ['Share, sell, or give away your access code.', 'Copy, republish, or redistribute the text.', 'Create derivative works without written permission.']],
+      ['h', 'Access changes'],
+      ['p', 'Codes that are shared or resold can be disabled without notice.'],
+      ['h', 'Permissions'],
+      ['p', 'Write to {email} for permission requests.']
+    ] },
+    support: { title: 'Support Us', blocks: [
+      ['p', 'This ministry flourishes because of people who faithfully stand with us. Here is how you can help.'],
+      ['ul', ['**Pray** for the lives this message reaches.', '**Give** to fund ministry outreach and new resources. Contact us for giving details.', '**Share** the app with someone who needs encouragement.', '**Volunteer** your time and skills.']],
+      ['p', 'Heaven records every seed sown for the Gospel. Thank you for partnering with us.'],
+      ['cta']
+    ] },
+    contact: { title: 'Contact Us', blocks: [
+      ['p', 'Need a prayer, a testimony to share, an access code, or help with the app? Reach out. We reply within 48 hours.'],
+      ['p', '**Email:** {email}'],
+      ['p', '**Phone:** {phone}'],
+      ['cta-code']
+    ] }
   };
 
   var KEY = 'ebook_book_v1';
@@ -101,5 +161,5 @@ about: [
   }
 
   load();
-  window.Book = { meta: META, load: load, save: save, clear: clear, has: has, list: list, find: find, ids: ids, sections: sections, parse: parse };
+  window.Book = { meta: META, pages: PAGES, load: load, save: save, clear: clear, has: has, list: list, find: find, ids: ids, sections: sections, parse: parse };
 })();
