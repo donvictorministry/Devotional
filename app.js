@@ -234,9 +234,9 @@
     addQuickAction: function (o) { if (o && o.route) { quickActions.push(o); } }
   };
 
-  /* The "Access Code" menu items are for people who do not have a code yet. */
+  /* The "Access Code" menu items stay visible forever, even after unlocking. */
   function refreshAccessItems() {
-    $$('[data-access-item]').forEach(function (b) { b.hidden = hasAccess(); });
+    $$('[data-access-item]').forEach(function (b) { b.hidden = false; });   /* always visible, for everyone */
   }
 
   function refreshLocks() {
@@ -451,16 +451,16 @@
   function renderLock() {
     var SM = window.SupportModal;      /* optional file: support-modal.js */
     var pill = SM ? '<div class="lock-top"><button class="btn pill" id="btnInfo">' + svg('heart', 22) + '<span>' + esc(SM.config.buttonLabel) + '</span></button></div>' : '';
-     var back = window.CoverPage ? '<button class="btn outline" id="btnWelcome" style="border-radius:999px;flex:1;display:flex;align-items:center;justify-content:center;gap:6px">' + svg('back', 18) + '<span>Back</span></button>' : '';
-     view.innerHTML = '<div class="lock">' + pill + '<div class="lock-main">' +
-    '<div class="lock-ic">' + svg('lock', 40) + '</div>' +
-    '<h2>Unlock your book</h2>' +
-    '<p class="muted">Enter the access code you received. Each code works on one device only.</p>' +
-    '<div class="field"><label for="codeInput">Access code</label>' +
-    '<div class="pw"><input id="codeInput" type="password" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Enter code">' +
-    '<button class="eye" id="btnEye" type="button" aria-label="Show code" aria-pressed="false">' + svg('eye') + '</button></div></div>' +
-    '<button class="btn block" id="btnUnlock">Unlock Book</button>' +
-    '<div class="lock-links" style="display:flex;gap:12px;width:100%;margin-top:12px"><button class="btn outline" id="btnNeedCode" style="border-radius:999px;flex:1;display:flex;align-items:center;justify-content:center;gap:6px">' + svg('help', 18) + '<span>Need a code?</span></button>' + back + '</div></div></div>';
+    var back = window.CoverPage ? '<button class="btn text" id="btnWelcome">Back</button>' : '';
+    view.innerHTML = '<div class="lock">' + pill + '<div class="lock-main">' +
+      '<div class="lock-ic">' + svg('lock', 40) + '</div>' +
+      '<h2>Unlock your book</h2>' +
+      '<p class="muted">Enter the access code you received. Each code works on one device only.</p>' +
+      '<div class="field"><label for="codeInput">Access code</label>' +
+      '<div class="pw"><input id="codeInput" type="password" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Enter code">' +
+      '<button class="eye" id="btnEye" type="button" aria-label="Show code" aria-pressed="false">' + svg('eye') + '</button></div></div>' +
+      '<button class="btn block" id="btnUnlock">Unlock Book</button>' +
+      '<div class="lock-links"><button class="btn text" id="btnNeedCode">Need a code?</button>' + back + '</div></div></div>';
     $('#btnUnlock').addEventListener('click', doUnlock);
     $('#codeInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { doUnlock(); } });
     $('#btnEye').addEventListener('click', function () {
@@ -620,7 +620,7 @@
       });
       return;
     }
-    UI.dialog({ type: 'info', title: 'Install this app', message: 'Tap the three dots in Chrome, then choose Add to Home screen or Install app.' });
+    UI.dialog({ type: 'info', title: 'Install this app', message: 'Android: tap the three dots in Chrome, then choose Add to Home screen or Install app. iPhone: tap the Share button in Safari, then choose Add to Home Screen.' });
   }
   function shareApp() {
     var url = M.shareUrl || location.href.split('#')[0];
