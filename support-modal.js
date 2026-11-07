@@ -34,21 +34,21 @@
 
       /* STEP 1: what they get. Icon names are in icons.js. */
       benefits: {
-        hero: { icon: 'edit', title: 'Private Notepad', text: 'Write prayers and revelations, lock them with a PIN, and share them anytime.', badge: 'Powerful' },
+        hero: { icon: 'edit', title: 'Premium Notepad', text: 'Take notes on the go, secure them with a PIN, and share them easily. Import and export your private information whenever you need it.', badge: 'Powerful' },
         items: [
-          { icon: 'book', title: 'Chapters and declarations' },
+          { icon: 'book', title: 'Ebook Chapters and declarations' },
           { icon: 'todo', title: 'Prayer to-do list' },
           { icon: 'offline', title: 'Read offline anywhere' },
           { icon: 'moon', title: 'Dark mode and text size' },
           { icon: 'star', title: 'New features coming soon' },
-          { icon: 'heart', title: 'Priority across our apps' }
+          { icon: 'heart', title: 'Priority across our apps ecosystem' }
         ]
       },
 
       /* STEP 2: what their support achieves */
       impact: {
-        heading: 'Your seed keeps this ministry alive',
-        text: 'Every gift helps us keep serving people like you, every single day.',
+        heading: 'Making a Difference Together',
+        text: 'Your generosity helps us sustain accessible digital technologies that impact lives worldwide. Every contribution matters.',
         items: [
           { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and fast.' },
           { icon: 'servers', title: 'Servers', text: 'Powers every unlock and update.' },
