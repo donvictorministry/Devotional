@@ -72,7 +72,7 @@
       /* The Check out button and the contact box it opens */
       checkout: {
         button: 'Check out',
-        boxTitle: 'Reach out for bank'\s details to complete',
+        boxTitle: 'Reach out for account details to complete',
         boxText: 'Choose any link. We will send your access code once your support is received.',
         close: 'Close',
         /* {amount} is replaced with what the person picked */
