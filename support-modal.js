@@ -60,13 +60,13 @@
 
       /* STEP 3: the amounts. Add, remove or change any of them. */
       support: {
-        heading: 'Choose your support',
+        heading: 'Choose your support options',
         usdLabel: 'US Dollars',
         usd: ['$5', '$10', '$20', '$50', '$100'],
         ngnLabel: 'Nigerian Naira',
         ngn: ['\u20A65,000', '\u20A610,000', '\u20A620,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
-        note: 'We appreciate your one-time gift or monthly support. Your access code is our thank-you to you.'
+        note: '𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝘆𝗼𝘂𝗿 𝗴𝗲𝗻𝗲𝗿𝗼𝘂𝘀 𝗴𝗶𝗳𝘁 𝗼𝗿 𝗼𝗻𝗴𝗼𝗶𝗻𝗴 𝘀𝘂𝗽𝗽𝗼𝗿𝘁. 𝗬𝗼𝘂𝗿 𝗮𝗰𝗰𝗲𝘀𝘀 𝗰𝗼𝗱𝗲 𝗶𝘀 𝗼𝘂𝗿 𝘁𝗼𝗸𝗲𝗻 𝗼𝗳 𝗮𝗽𝗽𝗿𝗲𝗰𝗶𝗮𝘁𝗶𝗼𝗻.'
       },
 
       /* The Check out button and the contact box it opens */
