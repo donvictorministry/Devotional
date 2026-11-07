@@ -11,10 +11,10 @@
     var TEXT = {
       line1: "DON\u2019T",
       line2: 'GIVE UP!',
-      author: 'Rev. Dr. Chris Johnson, PhD',
-      subtitle: 'Faith, Hope and Endurance in Christ',
+      author: 'Rev. Dr. Don Victor, PhD',
+      subtitle: 'A Journey of Faith and Perseverance',
       tag: 'Enter your access code to unlock your spiritual breakthrough.',
-      button: 'BEGIN JOURNEY',
+      button: 'BEGIN THE JOURNEY',
       online: 'Read Online',
       offline: 'Read Offline'
     };
