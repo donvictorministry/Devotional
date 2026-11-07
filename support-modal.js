@@ -66,7 +66,7 @@
         ngnLabel: 'Nigerian Naira',
         ngn: ['\u20A65,000', '\u20A610,000', '\u20A630,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
-        note: 'One-time support. Your access code is included.'
+        note: 'Your one-time gift or monthly support means so much to our ministry. Your access code is included as our thank-you to you.'
       },
 
       /* The Check out button and the contact box it opens */
