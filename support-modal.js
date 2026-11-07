@@ -64,9 +64,9 @@
         usdLabel: 'US Dollars',
         usd: ['$5', '$10', '$20', '$50', '$100'],
         ngnLabel: 'Nigerian Naira',
-        ngn: ['\u20A65,000', '\u20A610,000', '\u20A630,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
+        ngn: ['\u20A65,000', '\u20A610,000', '\u20A620,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
-        note: 'Your one-time gift or monthly support means so much to our ministry. Your access code is included as our thank-you to you.'
+        note: 'We appreciate your one-time gift or monthly support. Your access code is our thank-you to you.'
       },
 
       /* The Check out button and the contact box it opens */
