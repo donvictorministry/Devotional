@@ -234,6 +234,11 @@
     addQuickAction: function (o) { if (o && o.route) { quickActions.push(o); } }
   };
 
+  /* The "Access Code" menu items are for people who do not have a code yet. */
+  function refreshAccessItems() {
+    $$('[data-access-item]').forEach(function (b) { b.hidden = hasAccess(); });
+  }
+
   function refreshLocks() {
     var locked = !hasAccess();
     $$('[data-gated]').forEach(function (b) {
@@ -346,11 +351,13 @@
 
     var left = [['info', 'About the Book', 'about'], ['person', 'About Developer', 'dev'], ['help', 'How to Use', 'how'],
       ['doc', 'Terms of Use', 'terms'], ['heart', 'Support Us', 'support'], ['mail', 'Contact Us', 'contact']];
-    $('#leftList').innerHTML = left.map(function (i) {
+    var SM = window.SupportModal;     /* optional file: support-modal.js */
+    var accessItem = SM ? '<button class="dr-item access" data-access-item="1"><span class="dr-ic">' + svg('lock') + '</span><span class="dr-txt">' + esc(SM.config.menuLabel) + '</span><span class="dr-tag">' + esc(SM.config.menuTag) + '</span></button>' : '';
+    $('#leftList').innerHTML = accessItem + left.map(function (i) {
       return '<button class="dr-item" data-info="' + i[2] + '"><span class="dr-ic">' + svg(i[0]) + '</span><span class="dr-txt">' + i[1] + '</span></button>';
     }).join('');
 
-    $('#rightList').innerHTML =
+    $('#rightList').innerHTML = accessItem +
       '<div class="dr-row"><span class="dr-ic">' + svg('moon') + '</span><span class="dr-txt">Dark mode</span><button class="switch" id="swDark" role="switch" aria-checked="false" aria-label="Dark mode"></button></div>' +
       '<div class="dr-row col"><div class="dr-line"><span class="dr-ic">' + svg('textsize') + '</span><span class="dr-txt">Text size</span><span class="dr-val" id="fsVal"></span></div>' +
       '<input id="fsRange" type="range" min="19" max="23" step="1" aria-label="Text size from 19 to 23 pixels"></div>' +
@@ -359,6 +366,7 @@
       '<button class="dr-item" id="miShare"><span class="dr-ic">' + svg('share') + '</span><span class="dr-txt">Share App</span></button>';
 
     $$('[data-info]').forEach(function (b) { b.addEventListener('click', function () { openInfo(b.getAttribute('data-info')); }); });
+    $$('[data-access-item]').forEach(function (b) { b.addEventListener('click', function () { SM.open(); }); });
     $('#swDark').addEventListener('click', function () { setTheme(theme() === 'dark' ? 'light' : 'dark'); });
     $('#fsRange').addEventListener('input', function () { setFont(parseInt(this.value, 10)); });
     $('#miTodo').setAttribute('data-gated', '1');
@@ -368,8 +376,8 @@
     $('#miInstall').addEventListener('click', installApp);
     $('#miShare').addEventListener('click', shareApp);
 
-    $('#btnLeft').addEventListener('click', function () { pushOv('left'); });
-    $('#btnRight').addEventListener('click', function () { refreshLocks(); pushOv('right'); });
+    $('#btnLeft').addEventListener('click', function () { refreshAccessItems(); pushOv('left'); });
+    $('#btnRight').addEventListener('click', function () { refreshLocks(); refreshAccessItems(); pushOv('right'); });
     $('#sheetBack').addEventListener('click', backOv);
     $('#leftBack').addEventListener('click', backOv);
     $('#rightBack').addEventListener('click', backOv);
