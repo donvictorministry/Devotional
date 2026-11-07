@@ -64,7 +64,7 @@
         usdLabel: 'US Dollars',
         usd: ['$5', '$10', '$20', '$50', '$100'],
         ngnLabel: 'Nigerian Naira',
-        ngn: ['\u20A65,000', '\u20A610,000', '\u20A615,000', '\u20A625,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
+        ngn: ['\u20A65,000', '\u20A610,000', '\u20A630,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
         note: 'One-time support. Your access code is included.'
       },
@@ -72,7 +72,7 @@
       /* The Check out button and the contact box it opens */
       checkout: {
         button: 'Check out',
-        boxTitle: 'Reach out to complete',
+        boxTitle: 'Reach out for bank'\s details to complete',
         boxText: 'Choose any link. We will send your access code once your support is received.',
         close: 'Close',
         /* {amount} is replaced with what the person picked */
