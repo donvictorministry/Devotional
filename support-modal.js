@@ -50,8 +50,8 @@
         heading: 'Making a Difference Together!',
         text: 'Your generosity helps us sustain this vision and impact more lives globally.',
         items: [
-          { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and fast.' },
-          { icon: 'servers', title: 'Servers', text: 'Powers every unlock and update.' },
+          { icon: 'cloud', title: 'Hosting', text: 'Powers our apps and keeps them accessible worldwide.' },
+          { icon: 'servers', title: 'Servers', text: 'Covers essential infrastructure costs.' },
           { icon: 'group', title: 'Staff salaries', text: 'supports those laboring daily to impact lives.' },
           { icon: 'office', title: 'Ministry office', text: 'Covers daily operating costs.' },
           { icon: 'globe', title: 'More outreach', text: 'New devotionals and apps for more hearts.' }
