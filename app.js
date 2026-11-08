@@ -460,8 +460,10 @@
     '<div class="pw"><input id="codeInput" type="password" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Enter code">' +
     '<button class="eye" id="btnEye" type="button" aria-label="Show code" aria-pressed="false">' + svg('eye') + '</button></div></div>' +
     '<button class="btn block" id="btnUnlock">Unlock Book</button>' +
-'<div class="lock-links" style="display:flex;gap:12px;width:100%;margin-top:12px"><button class="btn outline" id="btnNeedCode" style="border-radius:999px;flex:1;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap">' + svg('help', 18) + '<span>Need a code</span></button>' + back + '</div></div></div>';
-$('#codeInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { doUnlock(); } });
+   '<div class="lock-links" style="display:flex;gap:12px;width:100%;margin-top:12px"><button class="btn outline" id="btnNeedCode" style="border-radius:999px;flex:1;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap">' + svg('help', 18) + '<span>Need a code</span></button>' + back + '</div></div></div>';
+    $('#btnUnlock').addEventListener('click', doUnlock);
+    $('#codeInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { doUnlock(); } });
+
     $('#btnEye').addEventListener('click', function () {
       var inp = $('#codeInput'), show = inp.type === 'password';
       inp.type = show ? 'text' : 'password';
