@@ -1,12 +1,10 @@
-/* lock.js - access code check against your Google Apps Script web app.
-   Paste your Web App URL into API_URL (see Deployment.md). Each code works on one device only. */
 (function () {
   'use strict';
 
   var CFG = {
     API_URL: 'https://script.google.com/macros/s/AKfycby8udSzdfXAtT2rjBrEHuEQ9HNcIWfv9OW3XPJowKmKx2C-qifBxxQ55Q0qsL3IZzkd9g/exec',
-    PRODUCT: 'dont-give-up',     /* must match PRODUCT in the Settings sheet */
-    VERIFY_HOURS: 6,             /* how often an unlocked device re-checks its code (when online) */
+    PRODUCT: 'dont-give-up',     
+    VERIFY_HOURS: 6,             
     TIMEOUT_MS: 25000
   };
 
@@ -43,8 +41,6 @@
   }
 
   function configured() { return /^https:\/\/script\.google\.com\//.test(CFG.API_URL); }
-
-  /* Every backend call goes through here: spinner at screen center, timeout, clean errors. */
   function api(payload, label) {
     if (!configured()) { return Promise.resolve({ ok: false, error: 'not_configured' }); }
     if (!navigator.onLine) { return Promise.resolve({ ok: false, error: 'network' }); }
@@ -70,7 +66,6 @@
 
   function wipe() { drop(K.token); drop(K.verified); Book.clear(); }
 
-  /* First unlock on this device */
   function unlock(code) {
     var c = normalize(code);
     if (!c) { return Promise.resolve({ ok: false, error: 'missing' }); }
@@ -86,8 +81,6 @@
         return { ok: false, error: res.ok ? 'server' : (res.error || 'server') };
       });
   }
-
-  /* Re-check an unlocked device. Offline or slow network never locks the reader out. */
   function verify(force) {
     var t = token();
     if (!t) { return Promise.resolve({ ok: false, error: 'none' }); }
@@ -103,7 +96,6 @@
         }
         var definitive = { invalid: 1, revoked: 1, used: 1, unbound: 1, product: 1 };
         if (definitive[res.error]) { wipe(); return { ok: false, error: res.error }; }
-        /* network, timeout, server problems: keep reading from the saved copy */
         return { ok: Book.has(), offline: true, error: res.error };
       });
   }
