@@ -1,8 +1,3 @@
-/* dedication.js - Edge-to-edge, card-based Dedication module
- * 100dvh, strictly >= 19px fonts, zero max-width restrictions.
- * Flawless dark mode switching and app-wide icon integration.
- * Auto-injects into the left sidebar as the second item.
- */
 (function () {
   'use strict';
 
@@ -31,7 +26,7 @@
       '.ddc-body { padding: 0 0 calc(env(safe-area-inset-bottom, 0px) + 32px) 0; display: flex; flex-direction: column; width: 100%; flex: 1; overflow-y: auto; }',
       '.ddc-card { width: 100%; padding: 24px 20px; }',
       '.ddc-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 14px; line-height: 1.2; }',
-      '.ddc-card p { font-size: 19px; font-weight: 500; line-height: 1.5; margin-bottom: 16px; }',
+      '.ddc-card p { font-size: 19px; font-weight: 400; line-height: 1.5; margin-bottom: 16px; }',
       '.ddc-card p:last-child { margin-bottom: 0; }',
 
       /* Light Mode Colors (Default) */
@@ -63,17 +58,17 @@
       '</div>' +
       '<div class="ddc-body">' +
         '<div class="ddc-card">' +
-          '<h3>To Our Lord Jesus Christ</h3>' +
-          '<p>With profound gratitude to the Almighty, who is the ultimate author and finisher of our faith.</p>' +
+          '<h3>Dedicated to Lord Jesus Christ</h3>' +
+          '<p>With profound gratitude to God Almighty, the author and finisher of our faith. Lord Jesus, had You not saved my soul, I would not be here today, touching lives and fulfilling the purpose to which You have called me. All glory belongs to You.</p>' +
         '</div>' +
         '<div class="ddc-card">' +
-          '<h3>To My Family</h3>' +
-          '<p>For your unwavering love, patience, and steadfast support that have sustained this vision.</p>' +
+          '<h3>My Family, Friends, and Ministry Partners</h3>' +
+          '<p>With heartfelt gratitude for your unwavering love, enduring patience, constant encouragement, and steadfast support. Your invaluable contributions, sacrifices, and commitment have been instrumental in sustaining this vision and bringing it this far.</p>' +
         '</div>' +
         '<div class="ddc-card">' +
-          '<h3>To The Reader</h3>' +
-          '<p>This work is dedicated to every soul seeking hope, strength, and endurance.</p>' +
-          '<p>We pray that as you open this book, the Holy Spirit will illuminate your heart and equip you with the courage to never give up.</p>' +
+          '<h3>To Readers Across the World</h3>' +
+          '<p>Dedicated to every reader navigating life's uncertainties, seeking renewed hope, inner strength, and the courage to persevere.</p>' +
+          '<p>As you journey through these pages, may the Holy Spirit enlighten your understanding, strengthen your faith, and equip you with the grace and determination to never give up.</p>' +
         '</div>' +
       '</div>';
     document.body.appendChild(wrap);
