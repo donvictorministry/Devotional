@@ -1,10 +1,3 @@
-/* cover-page.js - Professional, elevated mobile cover for "Don't Give Up!"
- *
- * STANDALONE & ZERO-DEPENDENCY
- * Mobile-only layout with perfect contrast, zero cut-off, and generous bottom gap.
- * Contract: window.CoverPage.render(containerElement, onBegin)
- * Dispatches "coverpage:begin" CustomEvent on container.
- */
 (function () {
   'use strict';
   try {
@@ -40,56 +33,38 @@
 
     function css() {
       return [
-         /* Full viewport phone container */
         '.cvp{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;width:100%;overflow:hidden;',
         'background:linear-gradient(180deg,#FFFFFF 0%,#FFF8FA 35%,' + C.blushSoft + ' 65%,' + C.blush + ' 100%);',
         'color:' + C.ink + ';font-family:' + FONT + ';-webkit-user-select:none;user-select:none;',
         '-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;',
         'display:flex;flex-direction:column;justify-content:space-between}',
         
-        '.cvp *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}',
-
-        /* Ambient light halo behind book */
-        '.cvp-ambient{position:absolute;top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));left:50%;transform:translateX(-50%);',
+        '.cvp *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}',     '.cvp-ambient{position:absolute;top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));left:50%;transform:translateX(-50%);',
         'width:min(90dvw,340px);height:min(28dvh,220px);border-radius:50%;pointer-events:none;',
         'background:radial-gradient(circle,rgba(255,211,66,.38) 0%,rgba(223,30,90,.14) 50%,transparent 72%);',
         'filter:blur(24px);animation:cvp-glow 4.8s ease-in-out infinite}',
-
-        /* Upper content body */
         '.cvp-body{position:relative;z-index:10;flex:1 1 auto;display:flex;flex-direction:column;',
         'align-items:center;text-align:center;justify-content:center;',
         'gap:clamp(5px,1dvh,10px);',
         'padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 8px));',
         'padding-left:clamp(16px,5vw,24px);padding-right:clamp(16px,5vw,24px);padding-bottom:clamp(4px,.8dvh,8px)}',
-
-        /* Hero 3D Book: prominent, crisp, well-proportioned */
         '.cvp-bookwrap{position:relative;flex:0 0 auto;display:flex;justify-content:center;align-items:center;',
         'margin:0 auto;perspective:1000px}',
         '.cvp-book{height:clamp(126px,19dvh,168px);width:auto;display:block;',
         'filter:drop-shadow(0 14px 22px rgba(114,10,52,.32)) drop-shadow(0 4px 8px rgba(0,0,0,.12));',
         'animation:cvp-float 5s ease-in-out infinite}',
-
-        /* Author Pill (Larger and more prominent) */
         '.cvp-pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:clamp(8px,1.5dvh,12px) clamp(20px,5vw,28px);',
         'border-radius:999px;background:rgba(223,30,90,.08);border:1.5px solid rgba(223,30,90,.22);',
         'color:' + C.brandDark + ';font-size:clamp(17px,4.5vw,20px);font-weight:800;letter-spacing:.02em;line-height:1}',
         '.cvp-pill svg{width:19px;height:19px;fill:' + C.brand + ';flex:none}',
-
-        /* Title: prominent, bold (>= 42px up to 72px) */
         '.cvp-title{flex:0 0 auto;font-family:' + FONT + ';font-style:italic;font-weight:950;line-height:.92;',
         'letter-spacing:-.035em;font-size:clamp(42px,min(14.5vw,7.4dvh),72px)}',
         '.cvp-t1{display:block;color:' + C.ink + ';text-shadow:0 1px 2px rgba(21,11,28,.1)}',
         '.cvp-t2{display:block;color:' + C.brand + ';text-shadow:0 3px 12px rgba(223,30,90,.22)}',
-
-        /* Subtitle: strictly >= 19px */
         '.cvp-sub{flex:0 0 auto;font-size:clamp(19px,4.5vw,22px);font-weight:800;color:' + C.inkMuted + ';',
         'line-height:1.2;letter-spacing:-.01em}',
-
-        /* Access Tagline: strictly >= 19px */
         '.cvp-tag{flex:0 0 auto;font-size:clamp(19px,4.3vw,21px);font-weight:700;color:' + C.ink + ';line-height:1.24;',
         'text-wrap:balance;max-width:96%}',
-
-        /* "BEGIN JOURNEY" CTA: >= 20px, Jewel & Gold finish */
         '.cvp-begin{position:relative;flex:0 0 auto;width:100%;max-width:380px;height:clamp(52px,7.2dvh,62px);',
         'display:flex;align-items:center;justify-content:center;gap:12px;border-radius:999px;',
         'border:3px solid ' + C.gold + ';cursor:pointer;color:#FFFFFF;',
@@ -102,21 +77,13 @@
         '.cvp-begin:active{transform:scale(.97);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 4px 12px rgba(40,6,20,.4)}',
         '.cvp-begin:focus-visible{outline:3px solid ' + C.gold + ';outline-offset:3px}',
         '.cvp-begin svg{width:24px;height:20px;flex:none;display:block}',
-
-        /* Dedicated Crimson Footer Dock:
-           Solid crimson background for 100% button contrast,
-           with generous bottom padding to keep buttons well above Android navigation bars */
         '.cvp-footer{position:relative;z-index:20;flex:0 0 auto;width:100%;',
         'background:linear-gradient(180deg,#E82467 0%,' + C.brandDark + ' 50%,' + C.plum + ' 100%);',
         'padding-top:clamp(12px,1.8dvh,18px);',
         'padding-bottom:calc(env(safe-area-inset-bottom,0px) + clamp(50px,7.5dvh,75px));',
         'padding-left:16px;padding-right:16px;',
         'display:flex;flex-direction:column;align-items:center;box-shadow:0 -6px 20px rgba(179,18,74,.25)}',
-
-        /* Curved wave topper on the footer */
         '.cvp-wave-top{position:absolute;left:0;top:-28px;width:100%;height:30px;pointer-events:none;display:block}',
-
-        /* Dual Action Buttons inside the crimson footer: 100% contrast & fully visible */
         '.cvp-dock{width:100%;max-width:380px;display:flex;align-items:center;justify-content:space-between;gap:12px}',
         '.cvp-act{flex:1 1 0;height:clamp(46px,6dvh,54px);display:flex;align-items:center;justify-content:center;gap:8px;',
         'background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.45);border-radius:999px;',
@@ -125,8 +92,6 @@
         '.cvp-act:active{background:rgba(255,255,255,.32);transform:scale(.96)}',
         '.cvp-act:focus-visible{outline:2px solid ' + C.goldPale + ';outline-offset:2px}',
         '.cvp-act svg{width:20px;height:20px;flex:none;stroke:#FFFFFF}',
-
-        /* Animations */
         '.cvp-in{opacity:0;animation:cvp-rise .55s cubic-bezier(.16,1,.3,1) forwards}',
         '@keyframes cvp-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
         '@keyframes cvp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}',
@@ -135,8 +100,6 @@
         '@media (prefers-reduced-motion:reduce){.cvp *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}'
       ].join('');
     }
-
-    /* 3D Devotional Book SVG */
     function bookSVG() {
       return '<svg class="cvp-book" viewBox="0 0 280 340" aria-hidden="true">' +
         '<defs>' +
