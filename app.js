@@ -1,20 +1,3 @@
-/* app.js - the logic of the ebook app. Android phones only.
-
-   WHERE TO EDIT WHAT (search for the CAPITAL heading in this file):
-     Words of the info pages (About, How to Use, Terms...)  -> book.js  (Book.pages)
-     Book title, author, contacts, logo, developer          -> book.js  (META)
-     Cover page                                             -> cover-page.js
-     "What you get" modal and support amounts               -> support-modal.js  (CONFIG at the top)
-     Icons                                                  -> icons.js
-     Colours, sizes, spacing                                -> styles.css
-     Chapters of the book                                   -> the Book sheet in Google Sheets
-
-   SECTIONS OF THIS FILE, in order:
-     HELPERS  ->  UI (spinner, toast, dialogs)  ->  THEME AND TEXT SIZE  ->  OVERLAYS
-     ->  NOTEPAD HOST  ->  LOGO WITH GEAR RING  ->  INFORMATION PAGES  ->  MENUS
-     ->  VIEWS AND NAVIGATION (cover, unlock, front, contents, reading page)
-     ->  TO-DO LIST  ->  INSTALL AND SHARE  ->  START
-*/
 (function () {
   'use strict';
   if (document.documentElement.classList.contains('blocked')) { return; }
