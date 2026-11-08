@@ -1,6 +1,3 @@
-/* DV shell shim: lets the notepad below run as a self-contained widget in DV-Writing Assistant.
-   It only activates on Android when no host shell (window.DV) exists, adds a Note tile to the
-   home grid, and provides route, toast and navigation helpers. The notepad code below is unchanged. */
 (function () {
   try {
     if (window.DV || !/Android/i.test(navigator.userAgent)) return;
@@ -46,13 +43,7 @@
   } catch (e) {}
 })();
 
-/* =====================================================================
-   NOTEPAD MODULE — full-page notepad opened from the bottom navigation (Note).
-   Independent module: delete this file (and its script tag) and the app
-   keeps working (the Note tab simply disappears). Talks to the
-   shell only via DV. Owns its own styles, markup, storage and route.
-   Never uses browser alert / confirm / prompt.
-   ===================================================================== */
+
 (function() {
   try {
     if (!window.DV) return;
@@ -91,7 +82,6 @@
     };
     function svg(p, s) { s = s || 22; return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + p + '</svg>'; }
 
-    /* ===== STYLES ===== */
     var css = '' +
       '.dv-np{position:fixed;inset:0;z-index:9999;background:var(--dv-surface);display:none;flex-direction:column;font-family:Roboto,sans-serif;color:var(--dv-text)}' +
       '.dv-np.dv-np-on{display:flex}' +
@@ -142,8 +132,6 @@
     var st = document.createElement('style');
     st.textContent = css;
     document.head.appendChild(st);
-
-    /* ===== MARKUP ===== */
     var tools = [
       ['new', 'plus', 'Note'], ['redo', 'redo', 'Redo'], ['undo', 'undo', 'Undo'], ['paste', 'paste', 'Paste'],
       ['copy', 'copy', 'Copy'], ['import', 'imp', 'Import'], ['export', 'save', 'Export'], ['exit', 'exit', 'Exit']
@@ -174,8 +162,6 @@
         '<div class="dv-np-list">' + rowsHTML + '<div class="dv-np-menu" id="dvNpMenu" hidden>' + menuHTML + '</div></div>' +
       '</div>' +
       '<div class="dv-np-dlg" id="dvNpDlg"></div>');
-
-    /* ===== DIALOG (centre pop-up, replaces alert/confirm/prompt) ===== */
     function closeDlg() { Q('#dvNpDlg').classList.remove('dv-np-on'); Q('#dvNpDlg').innerHTML = ''; }
     function dialog(o) {
       var h = '<div class="dv-np-card"><div class="dv-np-ct">' + esc(o.title) + '</div>';
