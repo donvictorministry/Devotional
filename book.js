@@ -1,6 +1,3 @@
-/* book.js - book metadata, offline copy of the unlocked content, and the text parser.
-   The chapters themselves live in the "Book" sheet and arrive only after a valid unlock.
-   Edit the placeholder values in META below. */
 (function () {
   'use strict';
 
@@ -10,8 +7,6 @@
     author: 'Rev. Don Victor, PhD',
     edition: 'Edition 1.0, 2026',
     kicker: 'A Christian Devotional',
-
-    /* LOGO */
     logo: 'https://app.donvictorministry.org.ng/Devotional/ebook-icon.png',
 
     about: [
@@ -30,13 +25,11 @@
   "𝗬𝗢𝗨𝗥 𝗦𝗧𝗢𝗥𝗬 𝗜𝗦 𝗡𝗢𝗧 𝗢𝗩𝗘𝗥\n\nGod is still faithful. Don't give up!\n\nWishing you a rewarding and enriching reading encounter with God."
 ],
 
-    /* Contact */
     email: 'donvictorministry@gmail.com',
     phone: '+2347035794649',
     whatsapp: '2348086590253',
     facebook: 'https://www.facebook.com/Rev.DonVictor',
 
-    /* Link people get when they tap Share App.*/
     shareUrl: '',
     shareText: "Read \"Don't Give Up!\" by Rev. Don Victor, PhD.",
 
@@ -48,16 +41,6 @@
     }
   };
 
-  /* =====================================================================
-     INFO PAGES (left menu). Edit the words freely.
-     Each page is a list of blocks:
-       ['h',  'Heading']              ['p', 'Paragraph']
-       ['ul', ['item', 'item']]       ['ol', ['step', 'step']]    (bullets / numbers)
-       ['about']  the About text above   ['dev']  developer card
-       ['cta']    the four contact circles   ['cta-code']  contact circles with the access-code message
-     In any text: {title} {author} {edition} {email} {phone} are filled in automatically,
-     and **double stars** make bold text.
-     ===================================================================== */
   var PAGES = {
     about: { title: 'About the Book', blocks: [
       ['h', '{title}'],
@@ -132,7 +115,6 @@
     for (var i = 0; i < chapters.length; i++) { if (chapters[i].id === id) { return chapters[i]; } }
     return null;
   }
-  /* Reading order: front page first, then every chapter. */
   function ids() { return ['front'].concat(chapters.map(function (c) { return c.id; })); }
   function sections() {
     var out = [], map = {};
@@ -144,7 +126,6 @@
     return out;
   }
 
-  /* Body format: blank line = paragraph; "> text -- Ref" = scripture; "# " = sub-heading; "* " = declaration */
   function parse(body) {
     return String(body || '').split(/\n\s*\n/).map(function (raw) {
       var b = raw.trim();
