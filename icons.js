@@ -1,5 +1,3 @@
-/* icons.js - every icon in the app (Material, 24px, filled). One line per icon.
-   To add an icon: add a line  name: 'SVG path',  then use it with svg('name') in app.js. */
 window.ICON = {
   menu: 'M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z',
   more: 'M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
