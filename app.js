@@ -2,9 +2,6 @@
   'use strict';
   if (document.documentElement.classList.contains('blocked')) { return; }
 
-  /* ================================================================
-     HELPERS
-     ================================================================ */
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   function esc(s) {
@@ -13,8 +10,6 @@
   function get(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
   function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
-  /* Access rule: anyone can open Notepad and the to-do list, but only readers
-     who unlocked the book with an access code can use them. */
   function hasAccess() { return Lock.hasToken() && Book.has(); }
 
   var ICON = window.ICON || {};   /* the icon paths live in icons.js */
@@ -24,9 +19,6 @@
     return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="currentColor" aria-hidden="true"><path d="' + ICON[name] + '"/></svg>';
   }
 
-  /* ================================================================
-     UI: SPINNER, TOAST, DIALOGS (ALL CENTERED, NO BROWSER ALERTS)
-     ================================================================ */
   var UI = window.UI = {};
   var spinCount = 0;
   UI.spinner = function (on, msg) {
@@ -90,9 +82,6 @@
     setTimeout(function () { sp.remove(); }, 600);
   });
 
-  /* ================================================================
-     THEME AND TEXT SIZE
-     ================================================================ */
   var root = document.documentElement;
   function theme() { return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
   function setTheme(t) {
@@ -122,10 +111,6 @@
     if (r) { r.value = n; }
   }
 
-  /* ================================================================
-     OVERLAYS (menus and pages stack on top of each other; Android back
-     closes the page first, then the menu, then returns to the home page)
-     ================================================================ */
   var stack = [];
   var routes = {}, activeRoute = null, navItems = [], quickActions = [], menuBuilt = false, navCount = 0;
   function applyOv() {
@@ -163,9 +148,6 @@
     if (stack.length > depth) { stack.length = depth; applyOv(); }
   });
 
-  /* ================================================================
-     DV HOST SHELL: THE INTERFACE NOTEPAD.JS EXPECTS
-     ================================================================ */
   function removeGate() { var g = $('#npGate'); if (g) { g.remove(); } }
   function showGate(name) {
     var r = routes[name] || {}, label = r.title || 'This tool';
@@ -239,9 +221,6 @@
     if (after) { after(); }
   }
 
-  /* ================================================================
-     CIRCULAR LOGO / PHOTO WITH A ROTATING GEAR RING
-     ================================================================ */
   var GEAR_D = (function () {
     var n = 12, c = 50, ro = 49, rr = 42, rh = 36, step = Math.PI * 2 / n, d = '', i;
     function pt(r, a) { return (c + r * Math.cos(a)).toFixed(2) + ' ' + (c + r * Math.sin(a)).toFixed(2); }
@@ -257,7 +236,6 @@
     logo: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="#DF1E5A"/><path fill="#FFFFFF" d="M10 4h4v6h6v4h-6v7h-4v-7H4v-4h6z"/></svg>'),
     person: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="#F7C6D6"/><path fill="#DF1E5A" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>')
   };
-  /* The ring turns. The picture inside is a separate element and never turns. */
   function gearInner(src, fb, alt) {
     return '<svg class="gear-ring" viewBox="0 0 100 100" aria-hidden="true"><path fill-rule="evenodd" d="' + GEAR_D + '"/></svg>' +
       '<img class="gear-img" data-fb="' + fb + '" alt="' + esc(alt || '') + '" src="' + esc(src) + '">';
@@ -280,12 +258,8 @@
     });
   }
 
-  /* ================================================================
-     INFORMATION PAGES (LEFT MENU)
-     ================================================================ */
   var M = Book.meta;
 
-  /* Fills {title} {author} {edition} {email} {phone} from book.js, and **bold** text. */
   function fill(t) { return String(t).replace(/\{(\w+)\}/g, function (m, k) { return M[k] != null ? M[k] : m; }); }
   function inline(t) { return esc(fill(t)).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
 
@@ -298,7 +272,7 @@
       '<a class="cta facebook" href="' + esc(M.facebook) + '" target="_blank" rel="noopener" aria-label="Facebook">' + svg('facebook', 30) + '</a>' +
       '<a class="cta phone" href="tel:' + esc(M.phone) + '" aria-label="Call us">' + svg('phone', 30) + '</a></div>';
   }
-  /* Turns the page blocks written in book.js (Book.pages) into HTML. */
+  
   function renderBlocks(blocks) {
     return blocks.map(function (b) {
       var kind = b[0], val = b[1];
@@ -321,9 +295,6 @@
     openSheet(p.title, '<div class="info' + (p.center ? ' center' : '') + '">' + renderBlocks(p.blocks) + '</div>', function () { fixImgs($('#sheetBody')); });
   }
 
-  /* ================================================================
-     MENUS
-     ================================================================ */
   function buildMenus() {
     $('#btnLeft').innerHTML = svg('menu');
     $('#btnRight').innerHTML = svg('more');
@@ -377,9 +348,6 @@
     $('#btnDark').addEventListener('click', function () { setTheme(theme() === 'dark' ? 'light' : 'dark'); });
   }
 
-  /* ================================================================
-     VIEWS AND NAVIGATION
-     ================================================================ */
   var cur = 'welcome';
   var view = $('#view'), main = $('#main');
 
@@ -527,9 +495,6 @@
     if ($('#pgFront')) { $('#pgFront').addEventListener('click', function () { go('front'); }); }
   }
 
-  /* ================================================================
-     TO-DO LIST
-     ================================================================ */
   function todos() { try { return JSON.parse(get('ebook_todos', '[]')) || []; } catch (e) { return []; } }
   function saveTodos(t) { put('ebook_todos', JSON.stringify(t)); }
   function openTodo() {
@@ -586,9 +551,6 @@
     $('#todoText').focus();
   }
 
-  /* ================================================================
-     INSTALL AND SHARE
-     ================================================================ */
   var deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
   window.addEventListener('appinstalled', function () { deferred = null; UI.toast('App installed', 'success'); });
@@ -615,9 +577,6 @@
     UI.dialog({ type: 'info', title: 'Share this link', message: url });
   }
 
-  /* ================================================================
-     START
-     ================================================================ */
   function start() {
     buildMenus();
     setFont(fontSize());
