@@ -52,11 +52,11 @@
       '</div>' +
       '<div class="ddc-body">' +
         '<div class="ddc-card">' +
-          '<h3>Dedicated to Lord Jesus Christ</h3>' +
+          '<h3>Dedicated To Our Lord Jesus Christ</h3>' +
           '<p>With profound gratitude to God Almighty, the author and finisher of our faith. Lord Jesus, had You not saved my soul, I would not be here today, touching lives and fulfilling the purpose to which You have called me. All glory belongs to You.</p>' +
         '</div>' +
         '<div class="ddc-card">' +
-          '<h3>My Family, Friends, and Ministry Partners</h3>' +
+          '<h3>To My Family, Friends, and Ministry Partners</h3>' +
           '<p>With heartfelt gratitude for your unwavering love, enduring patience, constant encouragement, and steadfast support. Your invaluable contributions, sacrifices, and commitment have been instrumental in sustaining this vision and bringing it this far.</p>' +
         '</div>' +
         '<div class="ddc-card">' +
